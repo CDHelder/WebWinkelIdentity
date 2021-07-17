@@ -53,6 +53,31 @@
     </dl>
 </div>
 
+@*<h3>Stock </h3>
+<table class="table">
+        <th>
+            
+        </th>
+       @foreach (var store in Model.StoresWithProduct)
+       {
+        <th>
+            @(store.Address.City)
+        </th>
+       }
+       @foreach (var product in Model.ProductVariations)
+        {
+            <tr>
+                <td>
+                    @(product.Size.ToString())
+                </td>
+
+                <td>
+                    @(product.AmountInStock.ToString())
+                </td>
+            </tr>
+           }
+</table>*@
+
 <h3>Stock </h3>
 <table class="table">
     <thead>

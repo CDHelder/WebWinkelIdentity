@@ -51,6 +51,54 @@
 </div>
 <hr />
 
+<h3>Stock </h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+           @foreach (var product in Model.ProductVariations)
+            {
+            <th>
+                @(product.Size.ToString())
+            </th>
+            }
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var store in Model.StoresWithProduct)
+        {
+        <tr>
+            <td>
+                <b>@(store.Address.City)</b>
+            </td>
+           @foreach (var product in store.Products)
+            {
+            <td>
+                <div class="form-group">
+                    <input asp-for="@product.AmountInStock" class="form-control, col-6" width="50" />
+                    <span asp-validation-for="@product.AmountInStock" class="text-danger"></span>
+                </div>
+            </td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+@*@foreach (var store in Model.StoresWithProduct)
+{
+    <a>@store.Address.City</a>
+
+    @foreach (var product in store.Products)
+    {
+        <a>@product.AmountInStock.ToString()</a>
+    }
+    <br />
+}*@
+
 @*<div class="row">
     <div class="col-md-4">
         <form method="post">

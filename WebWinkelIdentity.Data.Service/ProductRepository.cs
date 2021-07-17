@@ -179,14 +179,19 @@ namespace WebWinkelIdentity.Data.Service
             return _dbContext.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
-                .Where(p => 
-                    p.BrandId == product.BrandId && 
+                .Where(p =>
+                    p.BrandId == product.BrandId &&
                     p.CategoryId == product.CategoryId &&
                     p.Color == product.Color &&
                     p.Fabric == product.Fabric &&
                     p.Name == product.Name &&
                     p.Price == product.Price)
+                .ToList()
+                .GroupBy(p => new { p.Size })
+                .Select(p => p.First())
                 .ToList();
+                
+                
         }
     }
 }

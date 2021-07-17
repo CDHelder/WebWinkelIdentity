@@ -8,7 +8,6 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 {
     public class DetailsModel : PageModel
     {
-        //TODO: Voorraad weergave van elke maat in elke winkel (VAN DIT PRODUCT)
         private readonly IProductRepository _productRepository;
         private readonly IStoreRepository _storeRepository;
 

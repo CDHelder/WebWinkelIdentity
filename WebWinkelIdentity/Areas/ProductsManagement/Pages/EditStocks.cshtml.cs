@@ -10,14 +10,19 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
     {
         //TODO: Voorraad weergave van elke maat in elke winkel (VAN ALLEEN DIT PRODUCT) + mogelijkheid voorraad te wijzigen
         private readonly IProductRepository _productRepository;
+        private readonly IStoreRepository _storeRepository;
 
-        public EditStocksModel(IProductRepository productRepository)
+        public EditStocksModel(IProductRepository productRepository, IStoreRepository storeRepository)
         {
             this._productRepository = productRepository;
+            this._storeRepository = storeRepository;
         }
 
         [BindProperty]
         public Product Product { get; set; }
+
+        public List<Store> StoresWithProduct { get; set; }
+        public List<Product> ProductVariations { get; set; }
 
         public IActionResult OnGetAsync(int id)
         {
@@ -27,6 +32,8 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             }
 
             Product = _productRepository.GetProduct(id);
+            StoresWithProduct = _storeRepository.GetAllStores(Product);
+            ProductVariations = _productRepository.GetAllProductsVariations(Product);
 
             if (Product == null)
             {
@@ -36,21 +43,13 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
+        //TODO: MaakUpdate Stock + In repository
         public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
                 return Page();
             }
-
-//#pragma warning disable CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-//            if (_productRepository.AddProduct(Product) != 0)
-//#pragma warning restore CS0472 // The result of the expression is always the same since a value of this type is never equal to 'null'
-//            {
-//                return RedirectToPage($"./Details/{Product.Id}");
-//            }
 
             return Page();
         }
