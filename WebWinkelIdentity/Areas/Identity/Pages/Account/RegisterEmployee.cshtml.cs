@@ -18,17 +18,17 @@ using WebWinkelIdentity.Core;
 namespace WebWinkelIdentity.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterCustomerModel : PageModel
+    public class RegisterEmployeeModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterCustomerModel> _logger;
+        private readonly ILogger<RegisterEmployeeModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterCustomerModel(
+        public RegisterEmployeeModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterCustomerModel> logger,
+            ILogger<RegisterEmployeeModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -66,6 +66,22 @@ namespace WebWinkelIdentity.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [StringLength(100, ErrorMessage = "The {0} can be max {1} characters long.")]
+            [Display(Name = "Street name")]
+            public string Streetname { get; set; }
+
+            [Display(Name = "House number")]
+            public int HouseNumber { get; set; }
+
+            [Display(Name = "Postal code")]
+            public string PostalCode { get; set; }
+
+            [Display(Name = "City")]
+            public string City { get; set; }
+
+            [Display(Name = "Country")]
+            public string Country { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -80,14 +96,26 @@ namespace WebWinkelIdentity.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Customer { UserName = Input.Email, Email = Input.Email, Name = Input.Name };
+                var user = new Employee 
+                { 
+                    UserName = Input.Email, 
+                    Email = Input.Email, Name = 
+                    Input.Name, 
+                    Address = new Address 
+                    { 
+                        City = Input.City,
+                        Country = Input.Country,
+                        HouseNumber = Input.HouseNumber,
+                        PostalCode = Input.PostalCode,
+                        Streetname = Input.Streetname
+                    }};
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Customer"));
+                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Employee"));
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

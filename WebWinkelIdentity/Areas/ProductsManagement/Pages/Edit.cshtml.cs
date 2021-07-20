@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebWinkelIdentity.Core;
@@ -6,6 +7,7 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 {
+    [Authorize(Roles = "Admin")]
     public class EditModel : PageModel
     {
         //TODO: Voorraad weergave van elke maat in elke winkel + mogelijkheid voorraad te wijzigen

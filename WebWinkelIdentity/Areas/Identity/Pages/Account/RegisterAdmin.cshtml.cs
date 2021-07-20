@@ -18,17 +18,17 @@ using WebWinkelIdentity.Core;
 namespace WebWinkelIdentity.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
-    public class RegisterCustomerModel : PageModel
+    public class RegisterAdminModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ILogger<RegisterCustomerModel> _logger;
+        private readonly ILogger<RegisterAdminModel> _logger;
         private readonly IEmailSender _emailSender;
 
-        public RegisterCustomerModel(
+        public RegisterAdminModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            ILogger<RegisterCustomerModel> logger,
+            ILogger<RegisterAdminModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
@@ -46,11 +46,6 @@ namespace WebWinkelIdentity.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Name")]
-            [MaxLength(100, ErrorMessage = "Name can be max 100 characters long")]
-            public string Name { get; set; }
-
             [Required]
             [EmailAddress]
             [Display(Name = "Email")]
@@ -80,14 +75,14 @@ namespace WebWinkelIdentity.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Customer { UserName = Input.Email, Email = Input.Email, Name = Input.Name };
+                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Customer"));
+                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

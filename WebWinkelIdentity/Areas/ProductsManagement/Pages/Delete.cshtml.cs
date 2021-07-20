@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebWinkelIdentity.Core;
@@ -6,6 +7,7 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 {
+    [Authorize(Policy = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly IProductRepository _productRepository;

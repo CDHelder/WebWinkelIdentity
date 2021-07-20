@@ -1,7 +1,7 @@
 ﻿@page
-@model RegisterCustomerModel
+@model RegisterEmployeeModel
 @{
-    ViewData["Title"] = "Register as Customer";
+    ViewData["Title"] = "Register Employee";
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -31,6 +31,32 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <h4>Address Information</h4>
+            <div class="form-group">
+                <label asp-for="Input.Streetname"></label>
+                <input asp-for="Input.Streetname" class="form-control" />
+                <span asp-validation-for="Input.Streetname" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.HouseNumber"></label>
+                <input asp-for="Input.HouseNumber" class="form-control" />
+                <span asp-validation-for="Input.HouseNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.PostalCode"></label>
+                <input asp-for="Input.PostalCode" class="form-control" />
+                <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.City"></label>
+                <input asp-for="Input.City" class="form-control" />
+                <span asp-validation-for="Input.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.Country"></label>
+                <input asp-for="Input.Country" class="form-control" />
+                <span asp-validation-for="Input.Country" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

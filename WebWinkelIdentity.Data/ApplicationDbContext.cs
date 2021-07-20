@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using WebWinkelIdentity.Core;
 
 namespace WebWinkelIdentity.Data
@@ -85,6 +87,8 @@ namespace WebWinkelIdentity.Data
                 PhoneNumber = 01012346543
             }
             };
+
+            var customerhasher = new PasswordHasher<Customer>();
             var customers = new List<Customer>
             {
             new Customer
@@ -92,9 +96,13 @@ namespace WebWinkelIdentity.Data
                 Id = customer1Id,
                 Name = "Jaap",
                 Email = "Jaap@gmail.com",
-                UserName = "Jaap123"
-            }
-            };
+                UserName = "Jaap123",
+                EmailConfirmed = true,
+                PasswordHash = customerhasher.HashPassword(null, "Wachtwoord123"),
+                SecurityStamp = string.Empty
+            }};
+
+            var employeehasher = new PasswordHasher<Employee>();
             var employees = new List<Employee>
             {
             new Employee
@@ -102,9 +110,13 @@ namespace WebWinkelIdentity.Data
                 Id = employee1Id,
                 AddressId = 3,
                 IBAN = "NL76 INGB 007 4201 6969",
-                Name = "Samantha"
-            }
-            };
+                Name = "Samantha",
+                CurrentlyEmployed = true,
+                Email = "Samantha@gmail.com",
+                EmailConfirmed = true,
+                UserName = "Samantha123",
+                PasswordHash = employeehasher.HashPassword(null, "Wachtwoord123")
+            }};
 
             var orderproducts = new List<OrderProduct>
             {
@@ -255,7 +267,7 @@ namespace WebWinkelIdentity.Data
             {
                 e.ToTable("Employees");
                 e.HasData(employees);
-                e.HasOne(u => u.Address).WithOne().HasForeignKey<Employee>(a => a.AddressId);
+                e.HasOne(u => u.Address).WithOne().HasForeignKey<Employee>(a => a.AddressId).IsRequired(false);
                 e.HasMany(u => u.EmployeeStores).WithOne(es => es.Employee).HasForeignKey(es => es.EmployeeId);
             });
 
@@ -285,6 +297,12 @@ namespace WebWinkelIdentity.Data
                 c.HasData(categories);
                 c.HasMany(c => c.Products).WithOne(p => p.Category).HasForeignKey(p => p.CategoryId);
             });
+
+            //builder.Entity<Admin>(a =>
+            //{
+            //    a.ToTable("Admins");
+            //    a.
+            //});
 
             //TODO: ~WebWinkel~ Implement ShoppingCart
         }

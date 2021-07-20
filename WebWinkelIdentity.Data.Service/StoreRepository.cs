@@ -40,5 +40,34 @@ namespace WebWinkelIdentity.Data.Service
         {
             return _dbContext.Stores.FirstOrDefault(s => s.Id == id);
         }
+
+        public bool SaveChangesAtleastOne()
+        {
+            if (_dbContext.SaveChanges() > 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool UpdateStoreProductsStock(List<Store> stores)
+        {
+            foreach (var store in stores)
+            {
+                _dbContext.Stores.Attach(store).State = EntityState.Modified;
+
+                //foreach (var product in store.Products)
+                //{
+                //    _dbContext.Products.Attach(product).State = EntityState.Modified;
+                //}
+            }
+
+            if (SaveChangesAtleastOne() == true)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

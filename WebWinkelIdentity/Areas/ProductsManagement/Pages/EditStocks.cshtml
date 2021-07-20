@@ -52,6 +52,7 @@
 <hr />
 
 <h3>Stock </h3>
+
 <table class="table">
     <thead>
         <tr>
@@ -67,7 +68,9 @@
             <th></th>
         </tr>
     </thead>
+
     <tbody>
+        <form method="post">
        @foreach (var store in Model.StoresWithProduct)
         {
         <tr>
@@ -85,8 +88,13 @@
             }
         </tr>
         }
+        <div class="form-group">
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+        </form>
     </tbody>
 </table>
+
 
 @*@foreach (var store in Model.StoresWithProduct)
 {

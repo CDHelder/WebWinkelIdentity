@@ -8,5 +8,7 @@ namespace WebWinkelIdentity.Data.Service.Interfaces
         public Store GetStoreInfo(int id);
         public List<Store> GetAllStores();
         public List<Store> GetAllStores(Product product);
+        public bool UpdateStoreProductsStock(List<Store> stores);
+        public bool SaveChangesAtleastOne();
     }
 }
