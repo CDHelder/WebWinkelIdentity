@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using WebWinkelIdentity.Core;
 using WebWinkelIdentity.Data.Service.Interfaces;
 
@@ -20,7 +21,11 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 
         [BindProperty]
         public Product Product { get; set; }
+        [BindProperty]
+        public List<Product> ProductVariations { get; set; }
 
+        //TODO: Fix decimal input mag ook decimale waardes geven en niet alleen hele
+        //VB = Input: 15,95 Veranderd naar: 1595
         public IActionResult OnGetAsync(int id)
         {
             if (id == null)
@@ -29,6 +34,7 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             }
 
             Product = _productRepository.GetProduct(id);
+            ProductVariations = _productRepository.GetAllProductsVariations(Product);
 
             if (Product == null)
             {
@@ -40,8 +46,6 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see https://aka.ms/RazorPagesCRUD.
         public IActionResult OnPostAsync()
         {
             if (!ModelState.IsValid)
@@ -49,9 +53,9 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
                 return Page();
             }
 
-            if (_productRepository.AddProduct(Product) != null)
+            if (_productRepository.UpdateProductProperties(Product, ProductVariations) == true)
             {
-                return RedirectToPage($"./Details/{Product.Id}");
+                return LocalRedirect($"/ProductsManagement/Details?id={Product.Id}");
             }
 
             return Page();

@@ -52,85 +52,152 @@
 <hr />
 
 <h3>Stock </h3>
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
+                </th>
+                @for (int i = 0; i < Model.ProductVariations.Count(); i++)
+                {
+                    <th>
+                        @(Model.ProductVariations[i].Size.ToString())
+                    </th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Rotterdam</b>
+                </td>
+                @for (int i = 0; i < Model.ProductVariations.Count(); i++)
+                {
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Id)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].BrandId)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].CategoryId)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Color)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Description)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Fabric)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Name)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Price)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Size)
+                    <td class="form-group">
+                        <input asp-for="@Model.ProductVariations[i].RotterdamStock" class="form-control" />
+                        <span asp-validation-for="@Model.ProductVariations[i].RotterdamStock" class="text-danger"></span>
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <b>Haarlem</b>
+                </td>
+                @for (int i = 0; i < Model.ProductVariations.Count(); i++)
+                {
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Id)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].BrandId)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].CategoryId)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Color)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Description)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Fabric)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Name)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Price)
+                    @Html.HiddenFor(model => Model.ProductVariations[i].Size)
+                    <td class="form-group">
+                        <input asp-for="@Model.ProductVariations[i].HaarlemStock" class="form-control" />
+                        <span asp-validation-for="@Model.ProductVariations[i].HaarlemStock" class="text-danger"></span>
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
+    <div class="form-group">
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>
 
-            </th>
-           @foreach (var product in Model.ProductVariations)
+@*<h3>Stock </h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+               @foreach (var product in Model.ProductVariations)
+                {
+                <th>
+                    @(product.Size.ToString())
+                </th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <form method="post">
+           @foreach (var store in Model.StoresWithProduct)
             {
-            <th>
-                @(product.Size.ToString())
-            </th>
-            }
-            <th></th>
-        </tr>
-    </thead>
-
-    <tbody>
-        <form method="post">
-       @foreach (var store in Model.StoresWithProduct)
-        {
-        <tr>
-            <td>
-                <b>@(store.Address.City)</b>
-            </td>
-           @foreach (var product in store.Products)
-            {
-            <td>
-                <div class="form-group">
-                    <input asp-for="@product.AmountInStock" class="form-control, col-6" width="50" />
-                    <span asp-validation-for="@product.AmountInStock" class="text-danger"></span>
-                </div>
-            </td>
-            }
-        </tr>
-        }
-        <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
-        </div>
-        </form>
-    </tbody>
-</table>
-
-
-@*@foreach (var store in Model.StoresWithProduct)
-{
-    <a>@store.Address.City</a>
-
-    @foreach (var product in store.Products)
-    {
-        <a>@product.AmountInStock.ToString()</a>
-    }
-    <br />
-}*@
-
-@*<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Products.Id" />
-            @foreach (var productDetail in Model.ProductDetails)
-            {
-                <div class="form-group">
-                    <label asp-for="@productDetail.Size" class="control-label"></label>
-                    <input asp-for="@productDetail.Size" class="form-control" />
-                    <span asp-validation-for="@productDetail.Size" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="@productDetail.AmountInStock" class="control-label"></label>
-                    <input asp-for="@productDetail.AmountInStock" class="form-control" />
-                    <span asp-validation-for="@productDetail.AmountInStock" class="text-danger"></span>
-                </div>
+            <tr>
+                <td>
+                    <b>@(store.Address.City)</b>
+                </td>
+               @foreach (var product in store.Products)
+                {
+                <td>
+                    <div class="form-group">
+                        <input asp-for="@product.AmountInStock" class="form-control, col-6" width="50" />
+                        <span asp-validation-for="@product.AmountInStock" class="text-danger"></span>
+                    </div>
+                </td>
+                }
+            </tr>
             }
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
-    </div>
-</div>*@
+            </form>
+        </tbody>
+    </table>*@
+
+
+@*@foreach (var store in Model.StoresWithProduct)
+    {
+        <a>@store.Address.City</a>
+
+        @foreach (var product in store.Products)
+        {
+            <a>@product.AmountInStock.ToString()</a>
+        }
+        <br />
+    }*@
+
+@*<div class="row">
+        <div class="col-md-4">
+            <form method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Products.Id" />
+                @foreach (var productDetail in Model.ProductDetails)
+                {
+                    <div class="form-group">
+                        <label asp-for="@productDetail.Size" class="control-label"></label>
+                        <input asp-for="@productDetail.Size" class="form-control" />
+                        <span asp-validation-for="@productDetail.Size" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="@productDetail.AmountInStock" class="control-label"></label>
+                        <input asp-for="@productDetail.AmountInStock" class="form-control" />
+                        <span asp-validation-for="@productDetail.AmountInStock" class="text-danger"></span>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>*@
 
 <div>
     <a asp-page="./Index">Back to List</a>

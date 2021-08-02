@@ -148,7 +148,7 @@ namespace WebWinkelIdentity.Data.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AddressId = table.Column<int>(type: "int", nullable: false),
+                    AddressId = table.Column<int>(type: "int", nullable: true),
                     IBAN = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CurrentlyEmployed = table.Column<bool>(type: "bit", nullable: false)
                 },
@@ -160,7 +160,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         column: x => x.AddressId,
                         principalTable: "Addresses",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Employees_AspNetUsers_Id",
                         column: x => x.Id,
@@ -203,7 +203,7 @@ namespace WebWinkelIdentity.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AddressId = table.Column<int>(type: "int", nullable: false),
-                    WeekOpeningTimesId = table.Column<int>(type: "int", nullable: false)
+                    WeekOpeningTimesId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -219,7 +219,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         column: x => x.WeekOpeningTimesId,
                         principalTable: "WeekOpeningTimes",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateTable(
@@ -235,9 +235,9 @@ namespace WebWinkelIdentity.Data.Migrations
                     BrandId = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     Size = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AmountInStock = table.Column<int>(type: "int", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    StoreId = table.Column<int>(type: "int", nullable: false)
+                    RotterdamStock = table.Column<int>(type: "int", nullable: false),
+                    HaarlemStock = table.Column<int>(type: "int", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -252,12 +252,6 @@ namespace WebWinkelIdentity.Data.Migrations
                         name: "FK_Products_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Products_Stores_StoreId",
-                        column: x => x.StoreId,
-                        principalTable: "Stores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -312,7 +306,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         column: x => x.ProductId,
                         principalTable: "Products",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.NoAction);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.InsertData(
@@ -321,7 +315,8 @@ namespace WebWinkelIdentity.Data.Migrations
                 values: new object[,]
                 {
                     { 3, "Den Haag", "Netherlands", null, 26, "8137 YA", "Korte poten", null },
-                    { 4, "Rotterdam", "Netherlands", null, 12, "6573 IK", "Lijnbaan", null }
+                    { 4, "Rotterdam", "Netherlands", null, 12, "6573 IK", "Lijnbaan", null },
+                    { 5, "Haarlem", "Netherlands", null, 18, "2756 IK", "Zijlstraat", null }
                 });
 
             migrationBuilder.InsertData(
@@ -329,8 +324,8 @@ namespace WebWinkelIdentity.Data.Migrations
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
                 values: new object[,]
                 {
-                    { "52a5d716-a649-4476-b316-108d96c56112", 0, "07fb72b6-4852-40aa-8c7e-f1973a897f09", "Jaap@gmail.com", false, false, null, null, null, null, null, false, "24fcaee8-3b22-4fb9-a89a-796b2cd2f8d2", false, "Jaap123" },
-                    { "7036d951-7cc8-488f-b95b-10c2e96c31c9", 0, "6f6a7e85-165a-4be4-ba1c-cec67c13687a", null, false, false, null, null, null, null, null, false, "5fe13a67-b78b-4c7f-a7d6-87a0d499dde1", false, null }
+                    { "52a5d716-a649-4476-b316-108d96c56112", 0, "961686ee-766f-457f-b971-72d983fb6eb6", "Jaap@gmail.com", true, false, null, null, null, "AQAAAAEAACcQAAAAEIksm09b31HZ1jorYlbAwhjJ9QWuRxN5Y6gXj8CEzNC6rlmvw9YADtLXi3VWYsxT+w==", null, false, "", false, "Jaap123" },
+                    { "7036d951-7cc8-488f-b95b-10c2e96c31c9", 0, "e0b62dab-12a6-4805-a84e-3607b00037ba", "Samantha@gmail.com", true, false, null, null, null, "AQAAAAEAACcQAAAAEFJOlVPLrwwaV7L0D9/YLfL1JU/4BGBzX0Vy/xb3G4Akklr7vxxRwFeafEePbOZ32g==", null, false, "984b062f-8b4c-4886-a99f-5d7e4b51a2da", false, "Samantha123" }
                 });
 
             migrationBuilder.InsertData(
@@ -388,12 +383,16 @@ namespace WebWinkelIdentity.Data.Migrations
             migrationBuilder.InsertData(
                 table: "Employees",
                 columns: new[] { "Id", "AddressId", "CurrentlyEmployed", "IBAN", "Name" },
-                values: new object[] { "7036d951-7cc8-488f-b95b-10c2e96c31c9", 3, false, "NL76 INGB 007 4201 6969", "Samantha" });
+                values: new object[] { "7036d951-7cc8-488f-b95b-10c2e96c31c9", 3, true, "NL76 INGB 007 4201 6969", "Samantha" });
 
             migrationBuilder.InsertData(
                 table: "Stores",
                 columns: new[] { "Id", "AddressId", "WeekOpeningTimesId" },
-                values: new object[] { 1, 4, 1 });
+                values: new object[,]
+                {
+                    { 2, 5, null },
+                    { 1, 4, 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Addresses",
@@ -402,31 +401,35 @@ namespace WebWinkelIdentity.Data.Migrations
 
             migrationBuilder.InsertData(
                 table: "Products",
-                columns: new[] { "Id", "AmountInStock", "BrandId", "CategoryId", "Color", "Description", "Fabric", "Name", "Price", "Size", "StoreId" },
+                columns: new[] { "Id", "BrandId", "CategoryId", "Color", "Description", "Fabric", "HaarlemStock", "Name", "Price", "RotterdamStock", "Size" },
                 values: new object[,]
                 {
-                    { 15, 2, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", "Versace Broek", 69.95m, "L", 1 },
-                    { 14, 2, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", "Versace Broek", 69.95m, "M", 1 },
-                    { 13, 2, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", "Versace Broek", 69.95m, "S", 1 },
-                    { 12, 1, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", "Versace T-shirt", 45.95m, "XL", 1 },
-                    { 11, 2, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", "Versace T-shirt", 45.95m, "L", 1 },
-                    { 10, 2, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", "Versace T-shirt", 45.95m, "M", 1 },
-                    { 9, 2, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", "Versace T-shirt", 45.95m, "S", 1 },
-                    { 8, 1, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", "Gucci Broek", 59.95m, "XL", 1 },
-                    { 7, 2, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", "Gucci Broek", 59.95m, "L", 1 },
-                    { 6, 2, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", "Gucci Broek", 59.95m, "M", 1 },
-                    { 5, 2, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", "Gucci Broek", 59.95m, "S", 1 },
-                    { 4, 1, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", "Gucci T-shirt", 39.95m, "XL", 1 },
-                    { 3, 2, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", "Gucci T-shirt", 39.95m, "L", 1 },
-                    { 2, 2, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", "Gucci T-shirt", 39.95m, "M", 1 },
-                    { 1, 2, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", "Gucci T-shirt", 39.95m, "S", 1 },
-                    { 16, 1, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", "Versace Broek", 69.95m, "XL", 1 }
+                    { 15, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", 2, "Versace Broek", 69.95m, 2, "L" },
+                    { 14, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", 2, "Versace Broek", 69.95m, 2, "M" },
+                    { 13, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", 1, "Versace Broek", 69.95m, 2, "S" },
+                    { 12, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", 2, "Versace T-shirt", 45.95m, 1, "XL" },
+                    { 11, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", 2, "Versace T-shirt", 45.95m, 2, "L" },
+                    { 10, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", 2, "Versace T-shirt", 45.95m, 2, "M" },
+                    { 9, 2, 2, "Light-Yellow", "Licht shirt met versace logo", "100% Cotton", 1, "Versace T-shirt", 45.95m, 2, "S" },
+                    { 16, 2, 1, "Dark-Blue", "Donkere broek met versace logo", "100% Cotton", 2, "Versace Broek", 69.95m, 1, "XL" },
+                    { 8, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", 2, "Gucci Broek", 59.95m, 1, "XL" },
+                    { 6, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", 2, "Gucci Broek", 59.95m, 2, "M" },
+                    { 5, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", 1, "Gucci Broek", 59.95m, 2, "S" },
+                    { 4, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", 2, "Gucci T-shirt", 39.95m, 1, "XL" },
+                    { 3, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", 2, "Gucci T-shirt", 39.95m, 2, "L" },
+                    { 2, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", 2, "Gucci T-shirt", 39.95m, 2, "M" },
+                    { 1, 1, 2, "White", "Witte kleur met gucci logo", "100% Cotton", 1, "Gucci T-shirt", 39.95m, 2, "S" },
+                    { 7, 1, 1, "Light-Blue", "Lichte broek met gucci logo", "100% Cotton", 2, "Gucci Broek", 59.95m, 2, "L" }
                 });
 
             migrationBuilder.InsertData(
                 table: "StoreEmployees",
                 columns: new[] { "Id", "EmployeeId", "StoreId" },
-                values: new object[] { 1, "7036d951-7cc8-488f-b95b-10c2e96c31c9", 1 });
+                values: new object[,]
+                {
+                    { 2, "7036d951-7cc8-488f-b95b-10c2e96c31c9", 2 },
+                    { 1, "7036d951-7cc8-488f-b95b-10c2e96c31c9", 1 }
+                });
 
             migrationBuilder.InsertData(
                 table: "Orders",
@@ -503,11 +506,6 @@ namespace WebWinkelIdentity.Data.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_StoreId",
-                table: "Products",
-                column: "StoreId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_StoreEmployees_EmployeeId",
                 table: "StoreEmployees",
                 column: "EmployeeId");
@@ -527,7 +525,8 @@ namespace WebWinkelIdentity.Data.Migrations
                 name: "IX_Stores_WeekOpeningTimesId",
                 table: "Stores",
                 column: "WeekOpeningTimesId",
-                unique: true);
+                unique: true,
+                filter: "[WeekOpeningTimesId] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -551,13 +550,13 @@ namespace WebWinkelIdentity.Data.Migrations
                 name: "Employees");
 
             migrationBuilder.DropTable(
+                name: "Stores");
+
+            migrationBuilder.DropTable(
                 name: "Brands");
 
             migrationBuilder.DropTable(
                 name: "Categories");
-
-            migrationBuilder.DropTable(
-                name: "Stores");
 
             migrationBuilder.DropTable(
                 name: "Addresses");

@@ -48,6 +48,7 @@ namespace WebWinkelIdentity
             services.AddAuthorization(options => 
             {
                 options.AddPolicy("EmployeeUsers", policy => policy.RequireClaim("AccountState", "Approved"));
+                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
             });
         }
 

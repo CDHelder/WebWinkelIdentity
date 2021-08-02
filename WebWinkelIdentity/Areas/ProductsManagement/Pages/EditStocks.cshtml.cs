@@ -12,21 +12,19 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
     {
         //TODO: Voorraad weergave van elke maat in elke winkel (VAN ALLEEN DIT PRODUCT) + mogelijkheid voorraad te wijzigen
         private readonly IProductRepository _productRepository;
-        private readonly IStoreRepository _storeRepository;
 
-        public EditStocksModel(IProductRepository productRepository, IStoreRepository storeRepository)
+        public EditStocksModel(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
-            this._storeRepository = storeRepository;
         }
 
         [BindProperty]
         public Product Product { get; set; }
 
         [BindProperty]
-        public List<Store> StoresWithProduct { get; set; }
-
         public List<Product> ProductVariations { get; set; }
+
+        public bool SuccesfullySaved { get; set; }
 
         public IActionResult OnGetAsync(int id)
         {
@@ -36,7 +34,6 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             }
 
             Product = _productRepository.GetProduct(id);
-            StoresWithProduct = _storeRepository.GetAllStores(Product);
             ProductVariations = _productRepository.GetAllProductsVariations(Product);
 
             if (Product == null)
@@ -55,12 +52,15 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
                 return Page();
             }
 
-            if (_storeRepository.UpdateStoreProductsStock(StoresWithProduct) == true)
+            SuccesfullySaved = false;
+
+            if(_productRepository.UpdateProducts(ProductVariations) == true)
             {
-                return RedirectToPage($"./Details/{Product.Id}");
+                return LocalRedirect($"/ProductsManagement/Details?id={Product.Id}");
             }
 
             return Page();
+
         }
     }
 }

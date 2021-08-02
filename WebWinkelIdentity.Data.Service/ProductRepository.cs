@@ -50,15 +50,6 @@ namespace WebWinkelIdentity.Data.Service
             //    .ToList();
         }
 
-        public List<Product> GetAllStoreProducts(int storeid)
-        {
-            var products = _dbContext.Stores.Where(sp => sp.Id == storeid).SelectMany(sp => sp.Products)
-                .Include(p => p.Brand)
-                .Include(p => p.Category)
-                .ToList();
-            return products;
-        }
-
         public Product GetProduct(int id)
         {
             var product = _dbContext.Products
@@ -116,39 +107,21 @@ namespace WebWinkelIdentity.Data.Service
             return products;
         }
 
-        public List<Product> SearchProduct(string searchTerm, int storeId)
-        {
-            var products = _dbContext.Products.Where(p =>
-            p.Brand.Name.Contains(searchTerm) ||
-            p.Brand.Supplier.Name.Contains(searchTerm) ||
-            p.Category.Name.Contains(searchTerm) ||
-            p.Color.Contains(searchTerm) ||
-            p.Fabric.Contains(searchTerm) ||
-            p.Name.Contains(searchTerm) ||
-            p.Size.Contains(searchTerm) &&
-            p.StoreId == storeId
-            ).Include(p => p.Brand)
-                .Include(p => p.Category)
-                .ToList();
-
-            return products;
-        }
-
-        public Product UpdateProduct(Product product)
+        public bool UpdateProduct(Product product)
         {
             var excistingproduct = _dbContext.Products.FirstOrDefault(p => p.Id == product.Id);
-            if (excistingproduct != null)
+            if (excistingproduct == null)
             {
-                return product;
+                return false;
             }
 
             _dbContext.Products.Attach(product).State = EntityState.Modified;
             if (SaveChangesAtleastOne() == true)
             {
-                return product;
+                return true;
             }
 
-            return null;
+            return false;
         }
 
         public bool SaveChangesAtleastOne()
@@ -190,8 +163,32 @@ namespace WebWinkelIdentity.Data.Service
                 .GroupBy(p => new { p.Size })
                 .Select(p => p.First())
                 .ToList();
-                
-                
+        }
+
+        public bool UpdateProducts(List<Product> products)
+        {
+            foreach (var product in products)
+            {
+                _dbContext.Products.Attach(product).State = EntityState.Modified;
+            }
+
+            return SaveChangesAtleastOne() == true;
+        }
+
+        public bool UpdateProductProperties(Product product, List<Product> products)
+        {
+            foreach (var prod in products)
+            {
+                prod.BrandId = product.BrandId;
+                prod.CategoryId = product.CategoryId;
+                prod.Color = product.Color;
+                prod.Description = product.Description;
+                prod.Fabric = product.Fabric;
+                prod.Name = product.Name;
+                prod.Price = product.Price;
+            }
+
+            return UpdateProducts(products);
         }
     }
 }

@@ -22,20 +22,6 @@ namespace WebWinkelIdentity.Data.Service
             return _dbContext.Stores.ToList();
         }
 
-        public List<Store> GetAllStores(Product product)
-        {
-            return _dbContext.Stores
-                .Include(s => s.Address)
-                .Include(s => s.Products.Where(p =>
-                    p.BrandId == product.BrandId &&
-                    p.CategoryId == product.CategoryId &&
-                    p.Color == product.Color &&
-                    p.Fabric == product.Fabric &&
-                    p.Name == product.Name &&
-                    p.Price == product.Price))
-                .ToList();
-        }
-
         public Store GetStoreInfo(int id)
         {
             return _dbContext.Stores.FirstOrDefault(s => s.Id == id);

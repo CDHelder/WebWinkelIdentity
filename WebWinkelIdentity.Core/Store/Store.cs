@@ -8,7 +8,6 @@ namespace WebWinkelIdentity.Core
         public int AddressId { get; set; }
         public Address Address { get; set; }
         public List<StoreEmployee> StoreEmployees { get; set; }
-        public List<Product> Products { get; set; }
         public int? WeekOpeningTimesId { get; set; }
         public WeekOpeningTimes WeekOpeningTimes { get; set; }
     }

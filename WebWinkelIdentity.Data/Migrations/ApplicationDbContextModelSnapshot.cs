@@ -566,9 +566,6 @@ namespace WebWinkelIdentity.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AmountInStock")
-                        .HasColumnType("int");
-
                     b.Property<int>("BrandId")
                         .HasColumnType("int");
 
@@ -584,17 +581,21 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Property<string>("Fabric")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("HaarlemStock")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
+                        .HasPrecision(38, 2)
+                        .HasColumnType("decimal(38,2)");
+
+                    b.Property<int>("RotterdamStock")
+                        .HasColumnType("int");
 
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -602,458 +603,232 @@ namespace WebWinkelIdentity.Data.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("StoreId");
-
                     b.ToTable("Products");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 2,
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
-                            Size = "S",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "S"
                         },
                         new
                         {
                             Id = 2,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 2,
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
-                            Size = "M",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "M"
                         },
                         new
                         {
                             Id = 3,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 2,
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
-                            Size = "L",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "L"
                         },
                         new
                         {
                             Id = 4,
-                            AmountInStock = 1,
                             BrandId = 1,
                             CategoryId = 2,
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
-                            Size = "XL",
-                            StoreId = 1
+                            RotterdamStock = 1,
+                            Size = "XL"
                         },
                         new
                         {
                             Id = 5,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 1,
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
                             Name = "Gucci Broek",
                             Price = 59.95m,
-                            Size = "S",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "S"
                         },
                         new
                         {
                             Id = 6,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 1,
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci Broek",
                             Price = 59.95m,
-                            Size = "M",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "M"
                         },
                         new
                         {
                             Id = 7,
-                            AmountInStock = 2,
                             BrandId = 1,
                             CategoryId = 1,
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci Broek",
                             Price = 59.95m,
-                            Size = "L",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "L"
                         },
                         new
                         {
                             Id = 8,
-                            AmountInStock = 1,
                             BrandId = 1,
                             CategoryId = 1,
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Gucci Broek",
                             Price = 59.95m,
-                            Size = "XL",
-                            StoreId = 1
+                            RotterdamStock = 1,
+                            Size = "XL"
                         },
                         new
                         {
                             Id = 9,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 2,
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
-                            Size = "S",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "S"
                         },
                         new
                         {
                             Id = 10,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 2,
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
-                            Size = "M",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "M"
                         },
                         new
                         {
                             Id = 11,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 2,
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
-                            Size = "L",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "L"
                         },
                         new
                         {
                             Id = 12,
-                            AmountInStock = 1,
                             BrandId = 2,
                             CategoryId = 2,
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
-                            Size = "XL",
-                            StoreId = 1
+                            RotterdamStock = 1,
+                            Size = "XL"
                         },
                         new
                         {
                             Id = 13,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 1,
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
                             Name = "Versace Broek",
                             Price = 69.95m,
-                            Size = "S",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "S"
                         },
                         new
                         {
                             Id = 14,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 1,
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace Broek",
                             Price = 69.95m,
-                            Size = "M",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "M"
                         },
                         new
                         {
                             Id = 15,
-                            AmountInStock = 2,
                             BrandId = 2,
                             CategoryId = 1,
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace Broek",
                             Price = 69.95m,
-                            Size = "L",
-                            StoreId = 1
+                            RotterdamStock = 2,
+                            Size = "L"
                         },
                         new
                         {
                             Id = 16,
-                            AmountInStock = 1,
                             BrandId = 2,
                             CategoryId = 1,
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
                             Name = "Versace Broek",
                             Price = 69.95m,
-                            Size = "XL",
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 17,
-                            AmountInStock = 1,
-                            BrandId = 1,
-                            CategoryId = 2,
-                            Color = "White",
-                            Description = "Witte kleur met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci T-shirt",
-                            Price = 39.95m,
-                            Size = "S",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 18,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 2,
-                            Color = "White",
-                            Description = "Witte kleur met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci T-shirt",
-                            Price = 39.95m,
-                            Size = "M",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 19,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 2,
-                            Color = "White",
-                            Description = "Witte kleur met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci T-shirt",
-                            Price = 39.95m,
-                            Size = "L",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 20,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 2,
-                            Color = "White",
-                            Description = "Witte kleur met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci T-shirt",
-                            Price = 39.95m,
-                            Size = "XL",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 21,
-                            AmountInStock = 1,
-                            BrandId = 1,
-                            CategoryId = 1,
-                            Color = "Light-Blue",
-                            Description = "Lichte broek met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci Broek",
-                            Price = 59.95m,
-                            Size = "S",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 22,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 1,
-                            Color = "Light-Blue",
-                            Description = "Lichte broek met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci Broek",
-                            Price = 59.95m,
-                            Size = "M",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 23,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 1,
-                            Color = "Light-Blue",
-                            Description = "Lichte broek met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci Broek",
-                            Price = 59.95m,
-                            Size = "L",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 24,
-                            AmountInStock = 2,
-                            BrandId = 1,
-                            CategoryId = 1,
-                            Color = "Light-Blue",
-                            Description = "Lichte broek met gucci logo",
-                            Fabric = "100% Cotton",
-                            Name = "Gucci Broek",
-                            Price = 59.95m,
-                            Size = "XL",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 25,
-                            AmountInStock = 1,
-                            BrandId = 2,
-                            CategoryId = 2,
-                            Color = "Light-Yellow",
-                            Description = "Licht shirt met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace T-shirt",
-                            Price = 45.95m,
-                            Size = "S",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 26,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 2,
-                            Color = "Light-Yellow",
-                            Description = "Licht shirt met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace T-shirt",
-                            Price = 45.95m,
-                            Size = "M",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 27,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 2,
-                            Color = "Light-Yellow",
-                            Description = "Licht shirt met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace T-shirt",
-                            Price = 45.95m,
-                            Size = "L",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 28,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 2,
-                            Color = "Light-Yellow",
-                            Description = "Licht shirt met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace T-shirt",
-                            Price = 45.95m,
-                            Size = "XL",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 29,
-                            AmountInStock = 1,
-                            BrandId = 2,
-                            CategoryId = 1,
-                            Color = "Dark-Blue",
-                            Description = "Donkere broek met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace Broek",
-                            Price = 69.95m,
-                            Size = "S",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 30,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 1,
-                            Color = "Dark-Blue",
-                            Description = "Donkere broek met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace Broek",
-                            Price = 69.95m,
-                            Size = "M",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 31,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 1,
-                            Color = "Dark-Blue",
-                            Description = "Donkere broek met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace Broek",
-                            Price = 69.95m,
-                            Size = "L",
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 32,
-                            AmountInStock = 2,
-                            BrandId = 2,
-                            CategoryId = 1,
-                            Color = "Dark-Blue",
-                            Description = "Donkere broek met versace logo",
-                            Fabric = "100% Cotton",
-                            Name = "Versace Broek",
-                            Price = 69.95m,
-                            Size = "XL",
-                            StoreId = 2
+                            RotterdamStock = 1,
+                            Size = "XL"
                         });
                 });
 
@@ -1197,12 +972,13 @@ namespace WebWinkelIdentity.Data.Migrations
                         {
                             Id = "52a5d716-a649-4476-b316-108d96c56112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "cc05a810-c44d-46ca-858b-7fe4e01cb227",
+                            ConcurrencyStamp = "1b888187-bb23-4a8f-82f6-a35881c9d587",
                             Email = "Jaap@gmail.com",
-                            EmailConfirmed = false,
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEAIrNm32kqQNLlZG7ID42dYUKTiTkjPxNE/ZcyslEtH6RzLj1Fj5Z/YfCfJBB0yVjA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "71c93a2b-77e9-44b2-8f41-c00fd788ba7b",
+                            SecurityStamp = "",
                             TwoFactorEnabled = false,
                             UserName = "Jaap123",
                             Name = "Jaap"
@@ -1213,7 +989,7 @@ namespace WebWinkelIdentity.Data.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<int>("AddressId")
+                    b.Property<int?>("AddressId")
                         .HasColumnType("int");
 
                     b.Property<bool>("CurrentlyEmployed")
@@ -1236,14 +1012,17 @@ namespace WebWinkelIdentity.Data.Migrations
                         {
                             Id = "7036d951-7cc8-488f-b95b-10c2e96c31c9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "e7e9947c-8b6a-42ff-8e0f-b2be946f484d",
-                            EmailConfirmed = false,
+                            ConcurrencyStamp = "beacb3f8-6110-4de4-b89a-db4ba08f006f",
+                            Email = "Samantha@gmail.com",
+                            EmailConfirmed = true,
                             LockoutEnabled = false,
+                            PasswordHash = "AQAAAAEAACcQAAAAEOgjWZDfJW0XIYV9IR0z733UBOT290Btq/CiTDuiDMXYIotgyf2q/LmeJa8upghW+g==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "59619e87-158c-4d39-8a9d-bd1fd77c0fc1",
+                            SecurityStamp = "c94d01df-6366-4dd5-acfc-622afe7a7f6d",
                             TwoFactorEnabled = false,
+                            UserName = "Samantha123",
                             AddressId = 3,
-                            CurrentlyEmployed = false,
+                            CurrentlyEmployed = true,
                             IBAN = "NL76 INGB 007 4201 6969",
                             Name = "Samantha"
                         });
@@ -1381,17 +1160,9 @@ namespace WebWinkelIdentity.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebWinkelIdentity.Core.Store", "Store")
-                        .WithMany("Products")
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Brand");
 
                     b.Navigation("Category");
-
-                    b.Navigation("Store");
                 });
 
             modelBuilder.Entity("WebWinkelIdentity.Core.Store", b =>
@@ -1442,9 +1213,7 @@ namespace WebWinkelIdentity.Data.Migrations
                 {
                     b.HasOne("WebWinkelIdentity.Core.Address", "Address")
                         .WithOne()
-                        .HasForeignKey("WebWinkelIdentity.Core.Employee", "AddressId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("WebWinkelIdentity.Core.Employee", "AddressId");
 
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", null)
                         .WithOne()
@@ -1472,8 +1241,6 @@ namespace WebWinkelIdentity.Data.Migrations
 
             modelBuilder.Entity("WebWinkelIdentity.Core.Store", b =>
                 {
-                    b.Navigation("Products");
-
                     b.Navigation("StoreEmployees");
                 });
 

@@ -7,22 +7,19 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public class DeleteModel : PageModel
     {
         private readonly IProductRepository _productRepository;
-        private readonly IStoreRepository _storeRepository;
 
-        public DeleteModel(IProductRepository productRepository, IStoreRepository storeRepository)
+        public DeleteModel(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
-            this._storeRepository = storeRepository;
         }
 
         [BindProperty]
         public Product Product { get; set; }
 
-        public List<Store> StoresWithProduct { get; set; }
         public List<Product> ProductVariations { get; set; }
         public bool CurrentStock { get; set; }
 
@@ -34,13 +31,12 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             }
 
             Product = _productRepository.GetProduct(id);
-            StoresWithProduct = _storeRepository.GetAllStores(Product);
             ProductVariations = _productRepository.GetAllProductsVariations(Product);
             CurrentStock = false;
 
             foreach (var product in ProductVariations)
             {
-                if (product.AmountInStock > 0)
+                if (product.RotterdamStock > 0 || product.HaarlemStock > 0)
                 {
                     CurrentStock = true;
                 }

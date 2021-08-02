@@ -13,6 +13,20 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            @for (int i = 0; i < Model.ProductVariations.Count(); i++)
+            {
+                @Html.HiddenFor(model => Model.ProductVariations[i].BrandId)
+                @Html.HiddenFor(model => Model.ProductVariations[i].CategoryId)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Color)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Description)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Fabric)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Id)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Name)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Price)
+                @Html.HiddenFor(model => Model.ProductVariations[i].Size)
+                @Html.HiddenFor(model => Model.ProductVariations[i].RotterdamStock)
+                @Html.HiddenFor(model => Model.ProductVariations[i].HaarlemStock)
+            }
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="Product.Id" />
             <div class="form-group">
@@ -22,7 +36,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Product.Price" class="control-label"></label>
-                <input asp-for="Product.Price" class="form-control" />
+                <input asp-for="Product.Price" class="form-control" type="number" step="0.01"/>
                 <span asp-validation-for="Product.Price" class="text-danger"></span>
             </div>
             <div class="form-group">

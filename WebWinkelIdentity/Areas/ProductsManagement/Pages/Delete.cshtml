@@ -56,51 +56,60 @@
             @Html.DisplayFor(model => model.Product.Description)
         </dd>
     </dl>
-    
-    <h3>Stock </h3>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
 
-            </th>
-            @foreach (var product in Model.ProductVariations)
-            {
-            <th>
-                @(product.Size.ToString())
-            </th>
-            }
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var store in Model.StoresWithProduct)
-        {
-        <tr>
-            <td>
-                <b>@(store.Address.City)</b>
-            </td>
-            @foreach (var product in store.Products)
-            {
-            <td>
-                @(product.AmountInStock.ToString())
-            </td>
-            }
-        </tr>
-        }
-    </tbody>
-</table>
+<h3>Stock </h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+
+                </th>
+                @foreach (var product in Model.ProductVariations)
+                {
+                <th>
+                    @(product.Size.ToString())
+                </th>
+                }
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <b>Rotterdam</b>
+                </td>
+                @foreach (var product in Model.ProductVariations)
+                {
+                    <td>
+                        @product.RotterdamStock.ToString()
+                    </td>
+                }
+            </tr>
+            <tr>
+                <td>
+                    <b>Haarlem</b>
+                </td>
+                @foreach (var product in Model.ProductVariations)
+                {
+                    <td>
+                        @product.HaarlemStock.ToString()
+                    </td>
+                }
+            </tr>
+        </tbody>
+    </table>
 
     <form method="post">
         <input type="hidden" asp-for="Product.Id" />
         @if (Model.CurrentStock == false)
         {
-        <input type="submit" value="Delete" class="btn btn-danger" />
+            <input type="submit" value="Delete" class="btn btn-danger" />
         }
         else
-        { 
-        <strong>You can't delete a product that has stock</strong>
+        {
+            <strong>You can't delete a product that has stock</strong>
         }
         <a asp-page="./Index">Back to List</a>
     </form>
+
 </div>

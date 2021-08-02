@@ -11,16 +11,13 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
     public class DetailsModel : PageModel
     {
         private readonly IProductRepository _productRepository;
-        private readonly IStoreRepository _storeRepository;
 
-        public DetailsModel(IProductRepository productRepository, IStoreRepository storeRepository)
+        public DetailsModel(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
-            this._storeRepository = storeRepository;
         }
 
         public Product Product { get; set; }
-        public List<Store> StoresWithProduct { get; set; }
         public List<Product> ProductVariations { get; set; }
 
         public IActionResult OnGetAsync(int id)
@@ -31,7 +28,6 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
             }
 
             Product = _productRepository.GetProduct(id);
-            StoresWithProduct = _storeRepository.GetAllStores(Product);
             ProductVariations = _productRepository.GetAllProductsVariations(Product);
 
             if (Product == null)

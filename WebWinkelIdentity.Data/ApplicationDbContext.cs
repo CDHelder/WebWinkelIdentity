@@ -144,39 +144,22 @@ namespace WebWinkelIdentity.Data
 
             var products = new List<Product>
             {
-            new Product { Id = 1, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "S", AmountInStock = 2, StoreId = 1 },
-            new Product { Id = 2, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 3, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 1 },
-            new Product { Id = 4, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "XL", AmountInStock = 1, StoreId = 1 },
-            new Product { Id = 5, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "S", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 6, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 7, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 8, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "XL", AmountInStock = 1, StoreId = 1},
-            new Product { Id = 9, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "S", AmountInStock = 2, StoreId = 1 },
-            new Product { Id = 10, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 1 },
-            new Product { Id = 11, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 1 },
-            new Product { Id = 12, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "XL", AmountInStock = 1, StoreId = 1 },
-            new Product { Id = 13, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "S", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 14, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 15, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 1},
-            new Product { Id = 16, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "XL", AmountInStock = 1, StoreId = 1},
-
-            new Product { Id = 17, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "S", AmountInStock = 1, StoreId = 2 },
-            new Product { Id = 18, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 19, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 2 },
-            new Product { Id = 20, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "XL", AmountInStock = 2, StoreId = 2 },
-            new Product { Id = 21, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "S", AmountInStock = 1, StoreId = 2},
-            new Product { Id = 22, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 23, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 24, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "XL", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 25, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "S", AmountInStock = 1, StoreId = 2 },
-            new Product { Id = 26, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 2 },
-            new Product { Id = 27, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 2 },
-            new Product { Id = 28, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "XL", AmountInStock = 2, StoreId = 2 },
-            new Product { Id = 29, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "S", AmountInStock = 1, StoreId = 2},
-            new Product { Id = 30, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "M", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 31, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "L", AmountInStock = 2, StoreId = 2},
-            new Product { Id = 32, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "XL", AmountInStock = 2, StoreId = 2}
+            new Product { Id = 1, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
+            new Product { Id = 2, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 3, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 4, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
+            new Product { Id = 5, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
+            new Product { Id = 6, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 7, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 8, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
+            new Product { Id = 9, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1 },
+            new Product { Id = 10, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2 },
+            new Product { Id = 11, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2 },
+            new Product { Id = 12, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2 },
+            new Product { Id = 13, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
+            new Product { Id = 14, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 15, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
+            new Product { Id = 16, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
             };
 
             var timespan9 = new TimeSpan(9, 0, 0);
@@ -205,7 +188,6 @@ namespace WebWinkelIdentity.Data
                 s.HasData(stores);
                 s.HasOne(u => u.Address).WithOne().HasForeignKey<Store>(s => s.AddressId);
                 s.HasOne(u => u.WeekOpeningTimes).WithOne().HasForeignKey<Store>(s => s.WeekOpeningTimesId).OnDelete(DeleteBehavior.SetNull);
-                s.HasMany(u => u.Products).WithOne(p => p.Store).HasForeignKey(p => p.StoreId);
                 s.HasMany(u => u.StoreEmployees).WithOne(se => se.Store).HasForeignKey(se => se.StoreId);
             });
 
@@ -213,7 +195,7 @@ namespace WebWinkelIdentity.Data
             {
                 ps.ToTable("Products");
                 ps.HasData(products);
-                //.HasForeignKey(pd => pd.ProductId);
+                ps.Property(u => u.Price).HasPrecision(38, 2);
                 ps.HasOne(u => u.Brand).WithMany(b => b.Products).HasForeignKey(p => p.BrandId);
                 ps.HasOne(u => u.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId);
             });

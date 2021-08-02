@@ -17,9 +17,8 @@ namespace WebWinkelIdentity.Core
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Size { get; set; }
-        public int AmountInStock { get; set; }
+        public int RotterdamStock { get; set; }
+        public int HaarlemStock { get; set; }
         public string Description { get; set; }
-        public int StoreId { get; set; }
-        public Store Store { get; set; }
     }
 }

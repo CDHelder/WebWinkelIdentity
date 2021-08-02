@@ -7,7 +7,7 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 {
-    [Authorize(Policy = "Admin")]
+    [Authorize(Policy = "AdminOnly")]
     public class CreateModel : PageModel
     {
         //TODO: ~A~ Voeg ProductDetails toe aan Create, Delete, Detail en Edit
