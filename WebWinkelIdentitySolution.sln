@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebWinkelIdentity.Web", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebWinkelIdentity.Test", "WebWinkelTester\WebWinkelIdentity.Test.csproj", "{8E44B29E-A070-4249-9287-2078BF507C4A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWinkelIdentity.Core", "WebWinkelIdentity.Core\WebWinkelIdentity.Core.csproj", "{F472F557-67F9-4B80-A69F-75EA4D8CD92F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebWinkelIdentity.Core", "WebWinkelIdentity.Core\WebWinkelIdentity.Core.csproj", "{F472F557-67F9-4B80-A69F-75EA4D8CD92F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWinkelIdentity.Data", "WebWinkelIdentity.Data\WebWinkelIdentity.Data.csproj", "{A19DFA0A-F926-48C8-9247-68A66FF18EDA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebWinkelIdentity.Data", "WebWinkelIdentity.Data\WebWinkelIdentity.Data.csproj", "{A19DFA0A-F926-48C8-9247-68A66FF18EDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebWinkelIdentity.Data.Service", "WebWinkelIdentity.Data.Service\WebWinkelIdentity.Data.Service.csproj", "{6563530D-73A9-4182-9DA1-41B6A6566BBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebWinkelIdentity.Data.Service", "WebWinkelIdentity.Data.Service\WebWinkelIdentity.Data.Service.csproj", "{6563530D-73A9-4182-9DA1-41B6A6566BBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
