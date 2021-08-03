@@ -57,7 +57,7 @@
         </dd>
     </dl>
 
-<h3>Stock </h3>
+    <h3>Stock </h3>
     <table class="table">
         <thead>
             <tr>
@@ -66,38 +66,75 @@
                 </th>
                 @foreach (var product in Model.ProductVariations)
                 {
-                <th>
-                    @(product.Size.ToString())
-                </th>
+                    <th>
+                        @(product.Size.ToString())
+                    </th>
                 }
                 <th></th>
             </tr>
         </thead>
         <tbody>
+            @foreach (var store in Model.Stores)
+            {
             <tr>
                 <td>
-                    <b>Rotterdam</b>
+                    <b>@store.Address.City</b>
                 </td>
-                @foreach (var product in Model.ProductVariations)
+                @foreach (var storeProduct in Model.ProductStocks)
                 {
+                    if (store.Id == storeProduct.StoreId)
+                    {
                     <td>
-                        @product.RotterdamStock.ToString()
+                        @storeProduct.Quantity.ToString()
                     </td>
+                    }
                 }
             </tr>
-            <tr>
-                <td>
-                    <b>Haarlem</b>
-                </td>
-                @foreach (var product in Model.ProductVariations)
-                {
-                    <td>
-                        @product.HaarlemStock.ToString()
-                    </td>
-                }
-            </tr>
+            }
         </tbody>
     </table>
+
+    @*<h3>Stock </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+
+                    </th>
+                    @foreach (var product in Model.ProductVariations)
+                    {
+                    <th>
+                        @(product.Size.ToString())
+                    </th>
+                    }
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <b>Rotterdam</b>
+                    </td>
+                    @foreach (var product in Model.ProductVariations)
+                    {
+                        <td>
+                            @product.RotterdamStock.ToString()
+                        </td>
+                    }
+                </tr>
+                <tr>
+                    <td>
+                        <b>Haarlem</b>
+                    </td>
+                    @foreach (var product in Model.ProductVariations)
+                    {
+                        <td>
+                            @product.HaarlemStock.ToString()
+                        </td>
+                    }
+                </tr>
+            </tbody>
+        </table>*@
 
     <form method="post">
         <input type="hidden" asp-for="Product.Id" />

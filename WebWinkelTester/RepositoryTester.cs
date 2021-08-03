@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 using Xunit;
 
 namespace WebWinkelTester

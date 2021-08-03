@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Data.Service
@@ -17,19 +18,17 @@ namespace WebWinkelIdentity.Data.Service
 
         public List<Brand> GetAllBrands()
         {
-            var brands = _dbContext.Brands
+            return _dbContext.Brands
                 .Include(b => b.Products)
                 .Include(b => b.Supplier)
                 .ToList();
-            return brands;
         }
 
         public List<Category> GetAllCategories()
         {
-            var categories = _dbContext.Categories
+            return _dbContext.Categories
                 .Include(c => c.Products)
                 .ToList();
-            return categories;
         }
 
         public List<Product> GetAllProducts()
@@ -189,6 +188,26 @@ namespace WebWinkelIdentity.Data.Service
             }
 
             return UpdateProducts(products);
+        }
+
+        //TODO: MAAK METHOD DIE STOREPRODUCT 3DARRAY MEEGEEFT
+        public List<StoreProduct> GetAllStoreProducts(List<Product> products)
+        {
+            List<StoreProduct> storeProducts = new();
+
+            foreach (var product in products)
+            {
+                storeProducts.AddRange(_dbContext.StoreProducts
+                .Include(sp => sp.Store)
+                .Include(sp => sp.Product)
+                .Where(sp => sp.ProductId == product.Id)
+                .ToList()
+                .GroupBy(p => new { p.StoreId, p.ProductId })
+                .Select(sp => sp.First())
+                .ToList());
+            }
+
+            return storeProducts;
         }
     }
 }

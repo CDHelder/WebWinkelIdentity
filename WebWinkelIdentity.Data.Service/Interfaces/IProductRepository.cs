@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 
 namespace WebWinkelIdentity.Data.Service.Interfaces
 {
@@ -12,6 +13,7 @@ namespace WebWinkelIdentity.Data.Service.Interfaces
 
         public Product GetProduct(int id);
         public List<Product> GetAllProducts();
+        public List<StoreProduct> GetAllStoreProducts(List<Product> products);
         public List<Product> GetAllProductsVariations(Product product);
         public List<Product> GetProductsByBrand(int brandId);
         public List<Product> GetProductsByCategory(int categoryId);

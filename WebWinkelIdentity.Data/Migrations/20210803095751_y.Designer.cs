@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebWinkelIdentity.Data;
 
 namespace WebWinkelIdentity.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210803095751_y")]
+    partial class y
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -376,98 +378,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.Order", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("AddressId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CustomerId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<bool>("IsDelivered")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AddressId");
-
-                    b.HasIndex("CustomerId");
-
-                    b.ToTable("Orders");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AddressId = 2,
-                            CustomerId = "52a5d716-a649-4476-b316-108d96c56112",
-                            IsDelivered = false
-                        });
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.OrderProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("OrderId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("OrderId");
-
-                    b.HasIndex("ProductId")
-                        .IsUnique();
-
-                    b.ToTable("OrderProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            OrderId = 1,
-                            ProductId = 1,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            OrderId = 1,
-                            ProductId = 2,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 3,
-                            OrderId = 1,
-                            ProductId = 3,
-                            Quantity = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            OrderId = 1,
-                            ProductId = 4,
-                            Quantity = 1
-                        });
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.DayOpeningTime", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.DayOpeningTime", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -559,7 +470,98 @@ namespace WebWinkelIdentity.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.Product", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CustomerId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<bool>("IsDelivered")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("CustomerId");
+
+                    b.ToTable("Orders");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressId = 2,
+                            CustomerId = "52a5d716-a649-4476-b316-108d96c56112",
+                            IsDelivered = false
+                        });
+                });
+
+            modelBuilder.Entity("WebWinkelIdentity.Core.OrderProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("OrderId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OrderId");
+
+                    b.HasIndex("ProductId")
+                        .IsUnique();
+
+                    b.ToTable("OrderProducts");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            OrderId = 1,
+                            ProductId = 1,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            OrderId = 1,
+                            ProductId = 2,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            OrderId = 1,
+                            ProductId = 3,
+                            Quantity = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            OrderId = 1,
+                            ProductId = 4,
+                            Quantity = 1
+                        });
+                });
+
+            modelBuilder.Entity("WebWinkelIdentity.Core.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -581,12 +583,21 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Property<string>("Fabric")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("HaarlemStock")
+                        .HasColumnType("int");
+
+                    b.Property<int>("InTransport")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasPrecision(38, 2)
                         .HasColumnType("decimal(38,2)");
+
+                    b.Property<int>("RotterdamStock")
+                        .HasColumnType("int");
 
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
@@ -608,8 +619,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
+                            InTransport = 0,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
+                            RotterdamStock = 2,
                             Size = "S"
                         },
                         new
@@ -620,8 +634,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
+                            RotterdamStock = 2,
                             Size = "M"
                         },
                         new
@@ -632,8 +649,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
+                            RotterdamStock = 2,
                             Size = "L"
                         },
                         new
@@ -644,8 +664,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "White",
                             Description = "Witte kleur met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci T-shirt",
                             Price = 39.95m,
+                            RotterdamStock = 1,
                             Size = "XL"
                         },
                         new
@@ -656,8 +679,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
+                            InTransport = 0,
                             Name = "Gucci Broek",
                             Price = 59.95m,
+                            RotterdamStock = 2,
                             Size = "S"
                         },
                         new
@@ -668,8 +694,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci Broek",
                             Price = 59.95m,
+                            RotterdamStock = 2,
                             Size = "M"
                         },
                         new
@@ -680,8 +709,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci Broek",
                             Price = 59.95m,
+                            RotterdamStock = 2,
                             Size = "L"
                         },
                         new
@@ -692,8 +724,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Blue",
                             Description = "Lichte broek met gucci logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Gucci Broek",
                             Price = 59.95m,
+                            RotterdamStock = 1,
                             Size = "XL"
                         },
                         new
@@ -704,8 +739,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
+                            InTransport = 0,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
+                            RotterdamStock = 2,
                             Size = "S"
                         },
                         new
@@ -716,8 +754,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
+                            RotterdamStock = 2,
                             Size = "M"
                         },
                         new
@@ -728,8 +769,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
+                            RotterdamStock = 2,
                             Size = "L"
                         },
                         new
@@ -740,8 +784,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Light-Yellow",
                             Description = "Licht shirt met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace T-shirt",
                             Price = 45.95m,
+                            RotterdamStock = 1,
                             Size = "XL"
                         },
                         new
@@ -752,8 +799,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 1,
+                            InTransport = 0,
                             Name = "Versace Broek",
                             Price = 69.95m,
+                            RotterdamStock = 2,
                             Size = "S"
                         },
                         new
@@ -764,8 +814,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace Broek",
                             Price = 69.95m,
+                            RotterdamStock = 2,
                             Size = "M"
                         },
                         new
@@ -776,8 +829,11 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace Broek",
                             Price = 69.95m,
+                            RotterdamStock = 2,
                             Size = "L"
                         },
                         new
@@ -788,13 +844,16 @@ namespace WebWinkelIdentity.Data.Migrations
                             Color = "Dark-Blue",
                             Description = "Donkere broek met versace logo",
                             Fabric = "100% Cotton",
+                            HaarlemStock = 2,
+                            InTransport = 0,
                             Name = "Versace Broek",
                             Price = 69.95m,
+                            RotterdamStock = 1,
                             Size = "XL"
                         });
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.Store", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.Store", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -832,7 +891,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.StoreEmployee", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEmployee", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -865,310 +924,6 @@ namespace WebWinkelIdentity.Data.Migrations
                             Id = 2,
                             EmployeeId = "7036d951-7cc8-488f-b95b-10c2e96c31c9",
                             StoreId = 2
-                        });
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.StoreProduct", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<bool>("InTransport")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<int>("StoreId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductId");
-
-                    b.HasIndex("StoreId");
-
-                    b.ToTable("StoreProducts");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            InTransport = false,
-                            ProductId = 1,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 2,
-                            InTransport = false,
-                            ProductId = 1,
-                            Quantity = 1,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 3,
-                            InTransport = false,
-                            ProductId = 2,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 4,
-                            InTransport = false,
-                            ProductId = 2,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 5,
-                            InTransport = false,
-                            ProductId = 3,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 6,
-                            InTransport = false,
-                            ProductId = 3,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 7,
-                            InTransport = false,
-                            ProductId = 4,
-                            Quantity = 1,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 8,
-                            InTransport = false,
-                            ProductId = 4,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 9,
-                            InTransport = false,
-                            ProductId = 5,
-                            Quantity = 1,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 10,
-                            InTransport = false,
-                            ProductId = 5,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 11,
-                            InTransport = false,
-                            ProductId = 6,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 12,
-                            InTransport = false,
-                            ProductId = 6,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 13,
-                            InTransport = false,
-                            ProductId = 7,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 14,
-                            InTransport = false,
-                            ProductId = 7,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 15,
-                            InTransport = false,
-                            ProductId = 8,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 16,
-                            InTransport = false,
-                            ProductId = 8,
-                            Quantity = 1,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 17,
-                            InTransport = false,
-                            ProductId = 9,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 18,
-                            InTransport = false,
-                            ProductId = 9,
-                            Quantity = 1,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 19,
-                            InTransport = false,
-                            ProductId = 10,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 20,
-                            InTransport = false,
-                            ProductId = 10,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 21,
-                            InTransport = false,
-                            ProductId = 11,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 22,
-                            InTransport = false,
-                            ProductId = 11,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 23,
-                            InTransport = false,
-                            ProductId = 12,
-                            Quantity = 1,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 24,
-                            InTransport = false,
-                            ProductId = 12,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 25,
-                            InTransport = false,
-                            ProductId = 13,
-                            Quantity = 1,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 26,
-                            InTransport = false,
-                            ProductId = 13,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 27,
-                            InTransport = false,
-                            ProductId = 14,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 28,
-                            InTransport = false,
-                            ProductId = 14,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 29,
-                            InTransport = false,
-                            ProductId = 15,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 30,
-                            InTransport = false,
-                            ProductId = 15,
-                            Quantity = 2,
-                            StoreId = 2
-                        },
-                        new
-                        {
-                            Id = 31,
-                            InTransport = false,
-                            ProductId = 16,
-                            Quantity = 2,
-                            StoreId = 1
-                        },
-                        new
-                        {
-                            Id = 32,
-                            InTransport = false,
-                            ProductId = 16,
-                            Quantity = 1,
-                            StoreId = 2
-                        });
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.WeekOpeningTimes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("WeekOpeningTimes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1
                         });
                 });
 
@@ -1206,6 +961,24 @@ namespace WebWinkelIdentity.Data.Migrations
                         });
                 });
 
+            modelBuilder.Entity("WebWinkelIdentity.Core.WeekOpeningTimes", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("WeekOpeningTimes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1
+                        });
+                });
+
             modelBuilder.Entity("WebWinkelIdentity.Core.Customer", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -1220,11 +993,11 @@ namespace WebWinkelIdentity.Data.Migrations
                         {
                             Id = "52a5d716-a649-4476-b316-108d96c56112",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "befea43e-5495-43f6-936e-747fc2d4f9ca",
+                            ConcurrencyStamp = "891d98dc-d24c-4ff1-a5ee-3a736fb791a0",
                             Email = "Jaap@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEMdO/r3yMY8GmXoavZ1zcLIolQggnl6wwq7HsIGmeZYbXE1z+i23zePf5dK2f/hUmA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEEmoQtOs3T2buYPc9ph+5Flu/W07W6XGjfvJVY8JOnV6g1bah8rPzKuiqE7LXoz1HA==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -1260,13 +1033,13 @@ namespace WebWinkelIdentity.Data.Migrations
                         {
                             Id = "7036d951-7cc8-488f-b95b-10c2e96c31c9",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "fed53149-a88d-44db-becf-3968fec9397c",
+                            ConcurrencyStamp = "043bb5bb-6c58-4ce9-8795-381d470bb9dc",
                             Email = "Samantha@gmail.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEH8iwO1Dodqw2jG7K1qdwLu7weTmzCFE33fsB+fWmrQOhHYuHCtDCug0bMUeNLdSqw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGnq63uRanDtV5K2lNZSAqHMNjmpPb8UXf8uXicVQzjZnGCSzuHglT4pXp9sUrR6Og==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5235ab6b-d344-4ec9-a3d4-6c10ed465f1f",
+                            SecurityStamp = "4916857e-a601-43b8-96c3-c44124c1cdc9",
                             TwoFactorEnabled = false,
                             UserName = "Samantha123",
                             AddressId = 3,
@@ -1349,6 +1122,15 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("Supplier");
                 });
 
+            modelBuilder.Entity("WebWinkelIdentity.Core.DayOpeningTime", b =>
+                {
+                    b.HasOne("WebWinkelIdentity.Core.WeekOpeningTimes", null)
+                        .WithMany("DayOpeningTimes")
+                        .HasForeignKey("WeekOpeningTimesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("WebWinkelIdentity.Core.Order", b =>
                 {
                     b.HasOne("WebWinkelIdentity.Core.Address", "Address")
@@ -1376,7 +1158,7 @@ namespace WebWinkelIdentity.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.Product", "Product")
+                    b.HasOne("WebWinkelIdentity.Core.Product", "Product")
                         .WithOne()
                         .HasForeignKey("WebWinkelIdentity.Core.OrderProduct", "ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1385,16 +1167,7 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.DayOpeningTime", b =>
-                {
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.WeekOpeningTimes", null)
-                        .WithMany("DayOpeningTimes")
-                        .HasForeignKey("WeekOpeningTimesId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.Product", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.Product", b =>
                 {
                     b.HasOne("WebWinkelIdentity.Core.Brand", "Brand")
                         .WithMany("Products")
@@ -1413,17 +1186,17 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.Store", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.Store", b =>
                 {
                     b.HasOne("WebWinkelIdentity.Core.Address", "Address")
                         .WithOne()
-                        .HasForeignKey("WebWinkelIdentity.Core.StoreEntities.Store", "AddressId")
+                        .HasForeignKey("WebWinkelIdentity.Core.Store", "AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.WeekOpeningTimes", "WeekOpeningTimes")
+                    b.HasOne("WebWinkelIdentity.Core.WeekOpeningTimes", "WeekOpeningTimes")
                         .WithOne()
-                        .HasForeignKey("WebWinkelIdentity.Core.StoreEntities.Store", "WeekOpeningTimesId")
+                        .HasForeignKey("WebWinkelIdentity.Core.Store", "WeekOpeningTimesId")
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Address");
@@ -1431,38 +1204,19 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("WeekOpeningTimes");
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.StoreEmployee", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEmployee", b =>
                 {
                     b.HasOne("WebWinkelIdentity.Core.Employee", "Employee")
                         .WithMany("EmployeeStores")
                         .HasForeignKey("EmployeeId");
 
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.Store", "Store")
+                    b.HasOne("WebWinkelIdentity.Core.Store", "Store")
                         .WithMany("StoreEmployees")
                         .HasForeignKey("StoreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Employee");
-
-                    b.Navigation("Store");
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.StoreProduct", b =>
-                {
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("WebWinkelIdentity.Core.StoreEntities.Store", "Store")
-                        .WithMany()
-                        .HasForeignKey("StoreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
 
                     b.Navigation("Store");
                 });
@@ -1506,14 +1260,9 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("OrderProducts");
                 });
 
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.Store", b =>
+            modelBuilder.Entity("WebWinkelIdentity.Core.Store", b =>
                 {
                     b.Navigation("StoreEmployees");
-                });
-
-            modelBuilder.Entity("WebWinkelIdentity.Core.StoreEntities.WeekOpeningTimes", b =>
-                {
-                    b.Navigation("DayOpeningTimes");
                 });
 
             modelBuilder.Entity("WebWinkelIdentity.Core.Supplier", b =>
@@ -1521,6 +1270,11 @@ namespace WebWinkelIdentity.Data.Migrations
                     b.Navigation("Addresses");
 
                     b.Navigation("Brands");
+                });
+
+            modelBuilder.Entity("WebWinkelIdentity.Core.WeekOpeningTimes", b =>
+                {
+                    b.Navigation("DayOpeningTimes");
                 });
 
             modelBuilder.Entity("WebWinkelIdentity.Core.Customer", b =>

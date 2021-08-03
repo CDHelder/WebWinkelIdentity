@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 
 namespace WebWinkelIdentity.Data.Service.Interfaces
 {

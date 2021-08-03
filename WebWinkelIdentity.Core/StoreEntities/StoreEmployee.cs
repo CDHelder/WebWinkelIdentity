@@ -1,4 +1,4 @@
-﻿namespace WebWinkelIdentity.Core
+﻿namespace WebWinkelIdentity.Core.StoreEntities
 {
     public class StoreEmployee
     {

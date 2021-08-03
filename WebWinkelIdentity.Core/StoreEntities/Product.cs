@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebWinkelIdentity.Core
+namespace WebWinkelIdentity.Core.StoreEntities
 {
     public class Product
     {
@@ -17,8 +17,6 @@ namespace WebWinkelIdentity.Core
         public int CategoryId { get; set; }
         public Category Category { get; set; }
         public string Size { get; set; }
-        public int RotterdamStock { get; set; }
-        public int HaarlemStock { get; set; }
         public string Description { get; set; }
     }
 }

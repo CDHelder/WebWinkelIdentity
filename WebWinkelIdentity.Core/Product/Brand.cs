@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using WebWinkelIdentity.Core.StoreEntities;
 
 namespace WebWinkelIdentity.Core
 {

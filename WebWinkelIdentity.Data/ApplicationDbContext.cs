@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 
 namespace WebWinkelIdentity.Data
 {
@@ -16,6 +17,7 @@ namespace WebWinkelIdentity.Data
 
         //Products dbsets
         public DbSet<Product> Products { get; set; }
+        public DbSet<StoreProduct> StoreProducts { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
 
@@ -144,22 +146,57 @@ namespace WebWinkelIdentity.Data
 
             var products = new List<Product>
             {
-            new Product { Id = 1, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
-            new Product { Id = 2, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 3, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 4, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
-            new Product { Id = 5, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
-            new Product { Id = 6, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 7, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 8, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
-            new Product { Id = 9, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1 },
-            new Product { Id = 10, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2 },
-            new Product { Id = 11, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2 },
-            new Product { Id = 12, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2 },
-            new Product { Id = 13, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "S", RotterdamStock = 2, HaarlemStock = 1},
-            new Product { Id = 14, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "M", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 15, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "L", RotterdamStock = 2, HaarlemStock = 2},
-            new Product { Id = 16, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "XL", RotterdamStock = 1, HaarlemStock = 2},
+            new Product { Id = 1, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "S", },
+            new Product { Id = 2, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "M", },
+            new Product { Id = 3, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "L", },
+            new Product { Id = 4, Name = "Gucci T-shirt", Price = 39.95M, Description = "Witte kleur met gucci logo", BrandId = 1, CategoryId = 2, Color = "White", Fabric = "100% Cotton", Size = "XL", },
+            new Product { Id = 5, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "S",},
+            new Product { Id = 6, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "M",},
+            new Product { Id = 7, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "L",},
+            new Product { Id = 8, Name = "Gucci Broek", Price = 59.95M, Description = "Lichte broek met gucci logo", BrandId = 1, CategoryId = 1, Color = "Light-Blue", Fabric = "100% Cotton", Size = "XL",},
+            new Product { Id = 9, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "S",},
+            new Product { Id = 10, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "M",},
+            new Product { Id = 11, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "L",},
+            new Product { Id = 12, Name = "Versace T-shirt", Price = 45.95M, Description = "Licht shirt met versace logo", BrandId = 2, CategoryId = 2,  Color = "Light-Yellow", Fabric = "100% Cotton", Size = "XL",},
+            new Product { Id = 13, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "S", },
+            new Product { Id = 14, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "M", },
+            new Product { Id = 15, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "L", },
+            new Product { Id = 16, Name = "Versace Broek", Price = 69.95M, Description = "Donkere broek met versace logo", BrandId = 2, CategoryId = 1,  Color = "Dark-Blue", Fabric = "100% Cotton", Size = "XL",},
+            };
+            var storeProducts = new List<StoreProduct> 
+            {
+                new StoreProduct {Id = 1, StoreId = 1, ProductId = 1, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 2, StoreId = 2, ProductId = 1, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 3, StoreId = 1, ProductId = 2, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 4, StoreId = 2, ProductId = 2, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 5, StoreId = 1, ProductId = 3, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 6, StoreId = 2, ProductId = 3, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 7, StoreId = 1, ProductId = 4, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 8, StoreId = 2, ProductId = 4, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 9, StoreId = 1, ProductId = 5, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 10, StoreId = 2, ProductId = 5, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 11, StoreId = 1, ProductId = 6, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 12, StoreId = 2, ProductId = 6, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 13, StoreId = 1, ProductId = 7, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 14, StoreId = 2, ProductId = 7, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 15, StoreId = 1, ProductId = 8, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 16, StoreId = 2, ProductId = 8, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 17, StoreId = 1, ProductId = 9, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 18, StoreId = 2, ProductId = 9, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 19, StoreId = 1, ProductId = 10, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 20, StoreId = 2, ProductId = 10, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 21, StoreId = 1, ProductId = 11, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 22, StoreId = 2, ProductId = 11, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 23, StoreId = 1, ProductId = 12, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 24, StoreId = 2, ProductId = 12, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 25, StoreId = 1, ProductId = 13, Quantity = 1, InTransport = false },
+                new StoreProduct {Id = 26, StoreId = 2, ProductId = 13, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 27, StoreId = 1, ProductId = 14, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 28, StoreId = 2, ProductId = 14, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 29, StoreId = 1, ProductId = 15, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 30, StoreId = 2, ProductId = 15, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 31, StoreId = 1, ProductId = 16, Quantity = 2, InTransport = false },
+                new StoreProduct {Id = 32, StoreId = 2, ProductId = 16, Quantity = 1, InTransport = false },
             };
 
             var timespan9 = new TimeSpan(9, 0, 0);
@@ -198,6 +235,14 @@ namespace WebWinkelIdentity.Data
                 ps.Property(u => u.Price).HasPrecision(38, 2);
                 ps.HasOne(u => u.Brand).WithMany(b => b.Products).HasForeignKey(p => p.BrandId);
                 ps.HasOne(u => u.Category).WithMany(c => c.Products).HasForeignKey(p => p.CategoryId);
+            });
+
+            builder.Entity<StoreProduct>(sp =>
+            {
+                sp.ToTable("StoreProducts");
+                sp.HasData(storeProducts);
+                sp.HasOne(u => u.Product).WithMany().HasForeignKey(sp => sp.ProductId);
+                sp.HasOne(u => u.Store).WithMany().HasForeignKey(sp => sp.StoreId);
             });
 
             builder.Entity<WeekOpeningTimes>(wot =>

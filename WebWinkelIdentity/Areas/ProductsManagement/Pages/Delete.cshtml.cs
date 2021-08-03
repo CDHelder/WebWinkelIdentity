@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
@@ -11,16 +12,20 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
     public class DeleteModel : PageModel
     {
         private readonly IProductRepository _productRepository;
+        private readonly IStoreRepository _storeRepository;
 
-        public DeleteModel(IProductRepository productRepository)
+        public DeleteModel(IProductRepository productRepository, IStoreRepository storeRepository)
         {
             this._productRepository = productRepository;
+            this._storeRepository = storeRepository;
         }
 
         [BindProperty]
         public Product Product { get; set; }
 
         public List<Product> ProductVariations { get; set; }
+        public List<StoreProduct> ProductStocks { get; set; }
+        public List<Store> Stores { get; set; }
         public bool CurrentStock { get; set; }
 
         public IActionResult OnGetAsync(int id)
@@ -32,11 +37,13 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
 
             Product = _productRepository.GetProduct(id);
             ProductVariations = _productRepository.GetAllProductsVariations(Product);
-            CurrentStock = false;
+            ProductStocks = _productRepository.GetAllStoreProducts(ProductVariations);
+            Stores = _storeRepository.GetAllStores();
 
-            foreach (var product in ProductVariations)
+            CurrentStock = false;
+            foreach (var productStock in ProductStocks)
             {
-                if (product.RotterdamStock > 0 || product.HaarlemStock > 0)
+                if (productStock.Quantity > 0)
                 {
                     CurrentStock = true;
                 }

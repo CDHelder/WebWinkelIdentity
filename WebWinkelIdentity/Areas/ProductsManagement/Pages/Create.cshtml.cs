@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebWinkelIdentity.Core;
+using WebWinkelIdentity.Core.StoreEntities;
 using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
@@ -10,8 +11,7 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
     [Authorize(Policy = "AdminOnly")]
     public class CreateModel : PageModel
     {
-        //TODO: ~A~ Voeg ProductDetails toe aan Create, Delete, Detail en Edit
-        //TODO: Views voor Product of ProductDetails?
+
         private readonly IProductRepository _productRepository;
 
         public CreateModel(IProductRepository productRepository)

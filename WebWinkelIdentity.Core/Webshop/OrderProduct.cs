@@ -1,4 +1,6 @@
-﻿namespace WebWinkelIdentity.Core
+﻿using WebWinkelIdentity.Core.StoreEntities;
+
+namespace WebWinkelIdentity.Core
 {
     public class OrderProduct
     {
