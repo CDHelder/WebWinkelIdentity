@@ -43,18 +43,17 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             AllText = AllText.Replace("\r", "");
             //var list = AllText.Split("\n");
 
+            ////TODO: verplaats de Update Functionaliteit naar de SuccesfullyAddedStock pagina
+            ////Zo hebben werknemers een extra overzicht van alles voordat ze de producten toevoegen
             //foreach (var productId in list)
             //{
-            //    if (_productRepository.GetProduct(Int32.Parse(productId)) == null)
+            //    var product = _productRepository.GetStoreProduct(Int32.Parse(productId));
+            //    if (product == null)
             //    {
             //        FormResult = $"Error: Couldnt find product with id:{productId} in the database";
             //        return Page();
             //    }
-            //}
-
-            //foreach (var productId in list)
-            //{
-            //    var product = _productRepository.GetStoreProduct(Int32.Parse(productId));
+            //
             //    product.Quantity += 1;
             //    if (_productRepository.UpdateStoreProduct(product) == false)
             //    {
@@ -64,8 +63,6 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             //}
 
             AllTextData = AllText;
-            //TODO: Geef message door of Redirect naar SuccesPage
-            //waar een overzicht weergeven wordt van alle gemaakte veranderingen
             return RedirectToPage("/SuccesfullyAddedStock");
 
         }

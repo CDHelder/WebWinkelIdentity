@@ -51,29 +51,26 @@ namespace WebWinkelIdentity.Data.Service
 
         public Product GetProduct(int id)
         {
-            var product = _dbContext.Products
+            return _dbContext.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
                 .FirstOrDefault(p => p.Id == id);
-            return product;
         }
 
         public List<Product> GetProductsByBrand(int brandId)
         {
-            var products = _dbContext.Products.Where(p => p.BrandId == brandId)
+            return _dbContext.Products.Where(p => p.BrandId == brandId)
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
                 .ToList();
-            return products;
         }
 
         public List<Product> GetProductsByCategory(int categoryId)
         {
-            var products = _dbContext.Products.Where(p => p.CategoryId == categoryId)
+            return _dbContext.Products.Where(p => p.CategoryId == categoryId)
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
                 .ToList();
-            return products;
         }
 
         public Product AddProduct(Product product)
@@ -91,7 +88,7 @@ namespace WebWinkelIdentity.Data.Service
 
         public List<Product> SearchProduct(string searchTerm)
         {
-            var products = _dbContext.Products.Where(p =>
+            return _dbContext.Products.Where(p =>
             p.Brand.Name.Contains(searchTerm) ||
             p.Brand.Supplier.Name.Contains(searchTerm) ||
             p.Category.Name.Contains(searchTerm) ||
@@ -102,8 +99,6 @@ namespace WebWinkelIdentity.Data.Service
             ).Include(p => p.Brand)
                 .Include(p => p.Category)
                 .ToList();
-
-            return products;
         }
 
         public bool UpdateProduct(Product product)
@@ -238,6 +233,16 @@ namespace WebWinkelIdentity.Data.Service
             _dbContext.StoreProducts.Attach(excists).State = EntityState.Modified;
 
             return SaveChangesAtleastOne();
+        }
+
+        public List<Product> GetAllProducts(List<int> productIds)
+        {
+            var distinctProductIds = productIds.Distinct();
+            return _dbContext.Products
+                .Include(p => p.Brand)
+                .Include(p => p.Category)
+                .Where(p => productIds.Contains(p.Id))
+                .ToList();
         }
     }
 }

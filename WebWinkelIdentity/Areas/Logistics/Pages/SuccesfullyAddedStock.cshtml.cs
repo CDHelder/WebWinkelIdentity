@@ -18,38 +18,47 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             this._productRepository = productRepository;
         }
 
-        public Dictionary<Product, int> ProductsAndStockAdded { get; set; }
-
+        [BindProperty]
         public List<Product> Products { get; set; }
 
         [TempData]
         public string AllTextData { get; set; }
-        [TempData]
-        public string[] AllTextDataArray { get; set; }
-        public int[] AddedStockValues { get; set; }
+        public List<int> AllTextDataArrayTest { get; set; }
+        //public int[] AddedStockValues { get; set; }
 
         public IActionResult OnGet()
         {
-            AllTextDataArray = AllTextData.Split("\n");
+            var AllTextDataArray = AllTextData.Split("\n");
             Array.Sort(AllTextDataArray);
 
-            HashSet<int> productIds = new();
-            foreach (var Id in AllTextDataArray)
-            {
-                var x = Int32.Parse(Id);
-                var product = _productRepository.GetProduct(x);
-                if (productIds.Add(product.Id) == true)
-                {
-                    ProductsAndStockAdded.Add(product, 1);
-                }
-                else if(productIds.Add(product.Id) == false)
-                {
-                    //ProductsAndStockAdded.FirstOrDefault(pasd => pasd.Key.Id == x).K += 1;
-                    //ProductsAndStockAdded[product] = 
-                }
-            }
+            AllTextDataArrayTest = AllTextDataArray.Select(x => int.Parse(x)).ToList();
+
+            var ListData = AllTextDataArray.Select(x => int.Parse(x)).ToList();
+            Products = _productRepository.GetAllProducts(ListData);
+
+            //AddedStockValues = CreateAddedStockValues(ListData.ToArray(), AllTextDataArray.Distinct().Count());
 
             return Page();
         }
+
+        //public int[] CreateAddedStockValues(int[] productIdsValue, int distinctArrayLength)
+        //{
+        //    HashSet<int> productIds = new();
+        //    int[] stocks = new int[distinctArrayLength];
+        //    int iteration = -1;
+        //    foreach (var Id in productIdsValue)
+        //    {
+        //        if (productIds.Add(Id) == true)
+        //        {
+        //            iteration += 1;
+        //            stocks[iteration] = 1;
+        //        }
+        //        else if (productIds.Add(Id) == false)
+        //        {
+        //            stocks[iteration] += 1;
+        //        }
+        //    }
+        //    return stocks;
+        //}
     }
 }
