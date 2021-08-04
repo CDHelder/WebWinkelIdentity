@@ -12,8 +12,11 @@ namespace WebWinkelIdentity.Data.Service.Interfaces
         public List<Product> SearchProduct(string searchTerm);
 
         public Product GetProduct(int id);
+        public StoreProduct GetStoreProduct(int productId);
+
         public List<Product> GetAllProducts();
         public List<StoreProduct> GetAllStoreProducts(List<Product> products);
+
         public List<Product> GetAllProductsVariations(Product product);
         public List<Product> GetProductsByBrand(int brandId);
         public List<Product> GetProductsByCategory(int categoryId);
@@ -22,6 +25,8 @@ namespace WebWinkelIdentity.Data.Service.Interfaces
         public bool UpdateProduct(Product product);
         public bool UpdateProductProperties(Product product, List<Product> products);
         public bool UpdateProducts(List<Product> products);
+        public bool UpdateStoreProduct(StoreProduct storeProduct); 
+        public bool UpdateStoreProducts(List<StoreProduct> storeProducts);
         public bool DeleteProduct(int id);
         public bool SaveChangesAtleastOne();
 

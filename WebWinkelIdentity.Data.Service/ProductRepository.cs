@@ -171,7 +171,7 @@ namespace WebWinkelIdentity.Data.Service
                 _dbContext.Products.Attach(product).State = EntityState.Modified;
             }
 
-            return SaveChangesAtleastOne() == true;
+            return SaveChangesAtleastOne();
         }
 
         public bool UpdateProductProperties(Product product, List<Product> products)
@@ -190,7 +190,6 @@ namespace WebWinkelIdentity.Data.Service
             return UpdateProducts(products);
         }
 
-        //TODO: MAAK METHOD DIE STOREPRODUCT 3DARRAY MEEGEEFT
         public List<StoreProduct> GetAllStoreProducts(List<Product> products)
         {
             List<StoreProduct> storeProducts = new();
@@ -208,6 +207,37 @@ namespace WebWinkelIdentity.Data.Service
             }
 
             return storeProducts;
+        }
+
+        public bool UpdateStoreProducts(List<StoreProduct> storeProducts)
+        {
+            foreach (var product in storeProducts)
+            {
+                _dbContext.StoreProducts.Attach(product).State = EntityState.Modified;
+            }
+
+            return SaveChangesAtleastOne();
+        }
+
+        public StoreProduct GetStoreProduct(int productId)
+        {
+            return _dbContext.StoreProducts
+                .Include(sp => sp.Product)
+                .Include(sp => sp.Store)
+                .FirstOrDefault(sp => sp.ProductId == productId);
+        }
+
+        public bool UpdateStoreProduct(StoreProduct storeProduct)
+        {
+            var excists = _dbContext.StoreProducts.FirstOrDefault(sp => sp.Id == storeProduct.Id);
+            if (excists == null)
+            {
+                return false;
+            }
+
+            _dbContext.StoreProducts.Attach(excists).State = EntityState.Modified;
+
+            return SaveChangesAtleastOne();
         }
     }
 }

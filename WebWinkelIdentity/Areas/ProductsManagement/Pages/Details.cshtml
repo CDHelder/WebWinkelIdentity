@@ -53,7 +53,8 @@
     </dl>
 </div>
 
-@*<h3>Stock </h3>
+
+<h3>Stock </h3>
 <table class="table">
     <thead>
         <tr>
@@ -70,30 +71,25 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                <b>Rotterdam</b>
-            </td>
-            @foreach (var product in Model.ProductVariations)
-            {
+        @foreach (var store in Model.Stores)
+        {
+            <tr>
                 <td>
-                    @product.RotterdamStock.ToString()
+                    <b>@store.Address.City</b>
                 </td>
-            }
-        </tr>
-        <tr>
-            <td>
-                <b>Haarlem</b>
-            </td>
-            @foreach (var product in Model.ProductVariations)
-            {
-                <td>
-                    @product.HaarlemStock.ToString()
-                </td>
-            }
-        </tr>
+                @foreach (var storeProduct in Model.ProductStocks)
+                {
+                    if (store.Id == storeProduct.StoreId)
+                    {
+                        <td>
+                            @storeProduct.Quantity.ToString()
+                        </td>
+                    }
+                }
+            </tr>
+        }
     </tbody>
-</table>*@
+</table>
 
 <div>
     <a asp-page="./Edit" asp-route-id="@Model.Product.Id">Edit</a> |

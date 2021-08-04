@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
-namespace WebWinkelIdentity.Web.Areas.Logistics
+namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 {
-    public class InternalProductShippingModel : PageModel
+    public class RemoveStockModel : PageModel
     {
         public void OnGet()
         {
-
         }
     }
 }

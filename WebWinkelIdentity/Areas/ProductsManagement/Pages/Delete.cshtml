@@ -94,48 +94,6 @@
         </tbody>
     </table>
 
-    @*<h3>Stock </h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-
-                    </th>
-                    @foreach (var product in Model.ProductVariations)
-                    {
-                    <th>
-                        @(product.Size.ToString())
-                    </th>
-                    }
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>
-                        <b>Rotterdam</b>
-                    </td>
-                    @foreach (var product in Model.ProductVariations)
-                    {
-                        <td>
-                            @product.RotterdamStock.ToString()
-                        </td>
-                    }
-                </tr>
-                <tr>
-                    <td>
-                        <b>Haarlem</b>
-                    </td>
-                    @foreach (var product in Model.ProductVariations)
-                    {
-                        <td>
-                            @product.HaarlemStock.ToString()
-                        </td>
-                    }
-                </tr>
-            </tbody>
-        </table>*@
-
     <form method="post">
         <input type="hidden" asp-for="Product.Id" />
         @if (Model.CurrentStock == false)

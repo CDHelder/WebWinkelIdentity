@@ -20,12 +20,20 @@ namespace WebWinkelIdentity.Data.Service
         }
         public List<Store> GetAllStores()
         {
-            return _dbContext.Stores.ToList();
+            return _dbContext.Stores
+                .Include(s => s.Address)
+                .Include(s => s.StoreEmployees)
+                .Include(s => s.WeekOpeningTimes)
+                .ToList();
         }
 
         public Store GetStoreInfo(int id)
         {
-            return _dbContext.Stores.FirstOrDefault(s => s.Id == id);
+            return _dbContext.Stores
+                .Include(s => s.Address)
+                .Include(s => s.StoreEmployees)
+                .Include(s => s.WeekOpeningTimes)
+                .FirstOrDefault(s => s.Id == id);
         }
 
         public bool SaveChangesAtleastOne()
