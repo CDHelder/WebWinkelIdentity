@@ -1,0 +1,104 @@
+﻿@page
+@model WebWinkelIdentity.Web.Areas.Logistics.Pages.ConfirmAddStockModel
+@{
+    ViewData["Title"] = "Confirm stock changes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Are you sure you want to make the following changes?</h2>
+<h4 style="color:red">@Model.FormResult</h4>
+<br />
+<form method="post">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Size)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Price)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Color)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Brand)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Products[0].Category)
+                </th>
+                <th>
+                    <b>Stock Added</b>
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Size)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Price)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Color)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Brand.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Category.Name)
+                    </td>
+                    <td>
+                        <b>@Model.AllTextDataList.Count(adat => adat == item.Id)</b>
+                    </td>
+                    @*<td>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-area="ProductsManagement" asp-page="./EditStocks"
+                               asp-route-id="@item.Id">EditStocks</a>
+                            <a>|</a>
+                        }
+                        <a asp-area="ProductsManagement" asp-page="./Details"
+                           asp-route-id="@item.Id">Details</a>
+                    </td>*@
+                </tr>
+            }
+        </tbody>
+        @for (int i = 0; i < Model.AllTextDataList.Count(); i++)
+        {
+            @Html.HiddenFor(model => Model.AllTextDataList[i])
+        }
+        @for (int i = 0; i < Model.Products.Count(); i++)
+        {
+            @Html.HiddenFor(model => Model.Products[i].Id)
+            @Html.HiddenFor(model => Model.Products[i].BrandId)
+            @Html.HiddenFor(model => Model.Products[i].CategoryId)
+            @Html.HiddenFor(model => Model.Products[i].Color)
+            @Html.HiddenFor(model => Model.Products[i].Description)
+            @Html.HiddenFor(model => Model.Products[i].Fabric)
+            @Html.HiddenFor(model => Model.Products[i].Name)
+            @Html.HiddenFor(model => Model.Products[i].Price)
+            @Html.HiddenFor(model => Model.Products[i].Size)
+        }
+    </table>
+    <div class="form-group">
+        <br />
+        <input type="submit" value="Save" class="btn btn-primary" />
+    </div>
+</form>

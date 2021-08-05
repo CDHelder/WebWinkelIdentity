@@ -36,7 +36,7 @@ namespace WebWinkelIdentity.Areas.ProductsManagement.Pages
                 return Page();
             }
 
-            if (_productRepository.AddProduct(Product) != null)
+            if (_productRepository.CreateProduct(Product) != null)
             {
                 return RedirectToPage($"./Details/{Product.Id}");
             }

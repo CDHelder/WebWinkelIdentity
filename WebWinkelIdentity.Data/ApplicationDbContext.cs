@@ -18,6 +18,7 @@ namespace WebWinkelIdentity.Data
         //Products dbsets
         public DbSet<Product> Products { get; set; }
         public DbSet<StoreProduct> StoreProducts { get; set; }
+        public DbSet<ProductStockChange> ProductStockChanges { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Brand> Brands { get; set; }
 
@@ -243,6 +244,13 @@ namespace WebWinkelIdentity.Data
                 sp.HasData(storeProducts);
                 sp.HasOne(u => u.Product).WithMany().HasForeignKey(sp => sp.ProductId);
                 sp.HasOne(u => u.Store).WithMany().HasForeignKey(sp => sp.StoreId);
+            });
+
+            builder.Entity<ProductStockChange>(psc =>
+            {
+                psc.ToTable("ProductStockChanges");
+                psc.HasOne(u => u.StoreProduct).WithMany().HasForeignKey(psc => psc.StoreProductId);
+                psc.HasOne(u => u.AssociatedUser).WithMany().HasForeignKey(psc => psc.UserId);
             });
 
             builder.Entity<WeekOpeningTimes>(wot =>

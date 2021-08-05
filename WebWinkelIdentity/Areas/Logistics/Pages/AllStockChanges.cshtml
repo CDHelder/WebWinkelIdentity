@@ -1,0 +1,85 @@
+﻿@page
+@model WebWinkelIdentity.Web.Areas.Logistics.Pages.AllStockChangesModel
+
+@{
+    ViewData["Title"] = "AllStockChanges";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>AllStockChanges</h1>
+
+<p>
+    <a asp-page="AddStock">Add Stock</a> ~
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StockChange)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].DateChanged)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].AssociatedUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Size)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Category.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Brand.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.ProductStockChange) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StockChange)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateChanged)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AssociatedUser.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Size)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Category.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Brand.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

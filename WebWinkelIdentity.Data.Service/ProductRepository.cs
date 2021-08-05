@@ -73,7 +73,7 @@ namespace WebWinkelIdentity.Data.Service
                 .ToList();
         }
 
-        public Product AddProduct(Product product)
+        public Product CreateProduct(Product product)
         {
             if (product != null)
             {
@@ -241,7 +241,28 @@ namespace WebWinkelIdentity.Data.Service
             return _dbContext.Products
                 .Include(p => p.Brand)
                 .Include(p => p.Category)
-                .Where(p => productIds.Contains(p.Id))
+                .Where(p => distinctProductIds.Contains(p.Id))
+                .ToList();
+        }
+
+        public bool CreateProductStockChange(ProductStockChange productStockChange)
+        {
+            if (productStockChange != null)
+            {
+                _dbContext.ProductStockChanges.Add(productStockChange);
+            }
+
+            return SaveChangesAtleastOne();
+        }
+
+        public List<ProductStockChange> GetAllProductStockChanges()
+        {
+            return _dbContext.ProductStockChanges
+                .Include(psc => psc.Product)
+                .ThenInclude(p => p.Brand)
+                .Include(psc => psc.Product)
+                .ThenInclude(p => p.Category)
+                .Include(psc => psc.AssociatedUser)
                 .ToList();
         }
     }

@@ -34,36 +34,28 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
         public IActionResult OnPost()
         {
-            //if (AllText == null)
-            //{
-            //    FormResult = "Please enter a product id";
-            //    return Page();
-            //}
+            //TODO: geef de storeid mee en sla deze op in de ProductStockChange in de latere paginas
+            if (AllText == null)
+            {
+                FormResult = "Please enter a product id";
+                return Page();
+            }
 
             AllText = AllText.Replace("\r", "");
-            //var list = AllText.Split("\n");
+            var list = AllText.Split("\n");
 
-            ////TODO: verplaats de Update Functionaliteit naar de SuccesfullyAddedStock pagina
-            ////Zo hebben werknemers een extra overzicht van alles voordat ze de producten toevoegen
-            //foreach (var productId in list)
-            //{
-            //    var product = _productRepository.GetStoreProduct(Int32.Parse(productId));
-            //    if (product == null)
-            //    {
-            //        FormResult = $"Error: Couldnt find product with id:{productId} in the database";
-            //        return Page();
-            //    }
-            //
-            //    product.Quantity += 1;
-            //    if (_productRepository.UpdateStoreProduct(product) == false)
-            //    {
-            //        FormResult = $"Error: Couldnt save product with id:{productId} in the database";
-            //        return Page();
-            //    }
-            //}
+            foreach (var productId in list)
+            {
+                var product = _productRepository.GetStoreProduct(Int32.Parse(productId));
+                if (product == null)
+                {
+                    FormResult = $"Error: Couldnt find product with id:{productId} in the database";
+                    return Page();
+                }
+            }
 
             AllTextData = AllText;
-            return RedirectToPage("/SuccesfullyAddedStock");
+            return RedirectToPage("/ConfirmAddStock");
 
         }
     }

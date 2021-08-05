@@ -1,11 +1,11 @@
 ﻿@page
-@model WebWinkelIdentity.Web.Areas.Logistics.Pages.SuccesfullyAddedStockModel
+@model SuccesfullyAddedStockModel
 @{
-    ViewData["Title"] = "Succesfully added stock";
+    ViewData["Title"] = "Succesfully added changes";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>Succesfully Added Stock!</h1>
+<h2>You have succesfully made the following changes:</h2>
+<br />
 <table class="table">
     <thead>
         <tr>
@@ -38,7 +38,7 @@
     </thead>
     <tbody>
         @foreach (var item in Model.Products)
-        {
+            {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Id)
@@ -62,19 +62,23 @@
                 @Html.DisplayFor(modelItem => item.Category.Name)
             </td>
             <td>
-                <b>@Model.AllTextDataArrayTest.Count(adat => adat == item.Id)</b>
+                <b>@Model.AllTextDataList.Count(adat => adat == item.Id)</b>
             </td>
             <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-area="ProductsManagement" asp-page="./EditStocks" 
-                       asp-route-id="@item.Id">EditStocks</a>
-                    <a>|</a>
-                }
-                <a asp-area="ProductsManagement" asp-page="./Details" 
-                   asp-route-id="@item.Id">Details</a>
-            </td>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <a asp-area="ProductsManagement" asp-page="./EditStocks"
+                           asp-route-id="@item.Id">EditStocks</a>
+                        <a>|</a>
+                    }
+                    <a asp-area="ProductsManagement" asp-page="./Details"
+                       asp-route-id="@item.Id">Details</a>
+                </td>
         </tr>
-        }
+            }
     </tbody>
 </table>
+
+<div>
+    <a asp-area="ProductsManagement" asp-page="./Index">All Products List</a>
+</div>
