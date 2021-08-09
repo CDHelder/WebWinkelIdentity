@@ -258,10 +258,17 @@ namespace WebWinkelIdentity.Data.Service
         public List<ProductStockChange> GetAllProductStockChanges()
         {
             return _dbContext.ProductStockChanges
-                .Include(psc => psc.Product)
+                .Include(psc => psc.StoreProduct)
+                .ThenInclude(p => p.Product)
                 .ThenInclude(p => p.Brand)
-                .Include(psc => psc.Product)
+                .Include(psc => psc.StoreProduct)
+                .ThenInclude(p => p.Product)
                 .ThenInclude(p => p.Category)
+                .Include(psc => psc.StoreProduct)
+                .ThenInclude(p => p.Store)
+                .ThenInclude(p => p.Address)
+                .Include(psc => psc.StoreProduct)
+                .ThenInclude(p => p.Store)
                 .Include(psc => psc.AssociatedUser)
                 .ToList();
         }

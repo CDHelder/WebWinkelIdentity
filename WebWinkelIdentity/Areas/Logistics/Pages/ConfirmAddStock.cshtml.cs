@@ -25,6 +25,8 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         public List<int> AllTextDataList { get; set; }
 
         [TempData]
+        public int StoreId { get; set; }
+        [TempData]
         public string FormResult { get; set; }
         [TempData]
         public string AllTextData { get; set; }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using WebWinkelIdentity.Core.StoreEntities;
 using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
@@ -11,24 +13,31 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
     public class AddStockModel : PageModel
     {
         private readonly IProductRepository _productRepository;
+        private readonly IStoreRepository _storeRepository;
 
-        public AddStockModel(IProductRepository productRepository)
+        public AddStockModel(IProductRepository productRepository, IStoreRepository storeRepository)
         {
             this._productRepository = productRepository;
+            this._storeRepository = storeRepository;
         }
 
         [BindProperty]
         public string AllText { get; set; }
+        [BindProperty]
+        public int SelectedStoreId { get; set; }
+        public SelectList AllStores { get; set; }
 
         [TempData]
+        public int StoreId { get; set; }
+        [TempData]
         public string FormResult { get; set; }
-
         [TempData]
         public string AllTextData { get; set; }
 
         public IActionResult OnGet()
         {
             AllText = null;
+            AllStores = new SelectList(_storeRepository.GetAllStores(), "Id", "Address.City");
             return Page();
         }
 
@@ -55,6 +64,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             }
 
             AllTextData = AllText;
+
             return RedirectToPage("/ConfirmAddStock");
 
         }

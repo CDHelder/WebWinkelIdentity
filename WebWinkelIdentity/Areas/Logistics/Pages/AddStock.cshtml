@@ -10,17 +10,21 @@
 <h3 style="color:red">@Model.FormResult</h3> <br />
 
 <form method="post">
-    <div class="form-group" >
-        <textarea asp-for="@Model.AllText"
-               style="min-width:300px; min-height:550px; font-size:30pt"
-               placeholder="Make sure the id of the item on its label is in the textbox
+    <div class="form-group">
+        <div class="form-group">
+            <select asp-for="@Model.SelectedStoreId" class="form-control" style="width:400px" asp-items="@Model.AllStores" />
+            <br />
+        </div>
+        <textarea asp-for="@Model.AllText" class="form-group"
+                  style="min-width:300px; min-height:550px; font-size:30pt"
+                  placeholder="Make sure the id of the item on its label is in the textbox
 
 and that every id has its own line">
         </textarea>
         <span asp-validation-for="@Model.AllText" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <br />
-        <input type="submit" value="Save" class="btn btn-primary" />
+        <div class="form-group">
+            <br />
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
     </div>
 </form>
