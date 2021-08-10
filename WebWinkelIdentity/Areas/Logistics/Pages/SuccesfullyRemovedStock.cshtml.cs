@@ -9,11 +9,11 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 {
-    public class SuccesfullyAddedStockModel : PageModel
+    public class SuccesfullyRemovedStockModel : PageModel
     {
         private readonly IProductRepository _productRepository;
 
-        public SuccesfullyAddedStockModel(IProductRepository productRepository)
+        public SuccesfullyRemovedStockModel(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
         }
@@ -38,6 +38,5 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
             return Page();
         }
-
     }
 }

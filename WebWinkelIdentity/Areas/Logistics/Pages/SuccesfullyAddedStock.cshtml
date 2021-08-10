@@ -74,11 +74,11 @@
                 @if (User.IsInRole("Admin"))
                 {
                     <a asp-area="ProductsManagement" asp-page="./EditStocks"
-                       asp-route-id="@item.Id">EditStocks</a>
+                       asp-route-id="@item.ProductId">EditStocks</a>
                     <a>|</a>
                 }
                 <a asp-area="ProductsManagement" asp-page="./Details"
-                   asp-route-id="@item.Id">Details</a>
+                   asp-route-id="@item.ProductId">Details</a>
             </td>
         </tr>
             }

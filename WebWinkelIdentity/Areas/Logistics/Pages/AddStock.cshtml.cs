@@ -49,7 +49,6 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
         public IActionResult OnPost()
         {
-            //TODO: geef de storeid mee en sla deze op in de ProductStockChange in de latere paginas
             if (AllText == null)
             {
                 FormResult = "Please enter a product id";
@@ -63,6 +62,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
             AllText = AllText.Replace("\r", "");
             var list = AllText.Split("\n");
+            list = list.Where(x => !string.IsNullOrEmpty(x)).ToArray();
 
             var store = _storeRepository.GetStoreInfo(int.Parse(SelectedStoreId));
             if (store == null)
@@ -72,15 +72,19 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
             foreach (var productId in list)
             {
-                var product = _productRepository.GetStoreProduct(int.Parse(productId));
-                if (product == null)
+                if (productId != "")
                 {
-                    FormResult = $"Error: Couldnt find product with id:{productId} in the database";
-                    return Page();
+                    var intId = int.Parse(productId);
+                    var product = _productRepository.GetStoreProduct(intId);
+                    if (product == null)
+                    {
+                        FormResult = $"Error: Couldnt find product with id:{productId} in the database";
+                        return Page();
+                    }
                 }
             }
 
-            AllTextData = AllText;
+            AllTextData = string.Join("\n",list);
             StoreId = int.Parse(SelectedStoreId);
 
             return RedirectToPage("/ConfirmAddStock");

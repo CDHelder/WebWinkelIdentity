@@ -25,7 +25,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
         public void OnGetAsync()
         {
-            ProductStockChange = _productRepository.GetAllProductStockChanges();
+            ProductStockChange = _productRepository.GetAllProductStockChanges().OrderByDescending(p => p.Id).ToList();
         }
     }
 }

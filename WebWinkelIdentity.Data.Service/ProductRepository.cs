@@ -233,13 +233,13 @@ namespace WebWinkelIdentity.Data.Service
 
         public bool UpdateStoreProduct(StoreProduct storeProduct)
         {
-            var excists = _dbContext.StoreProducts.FirstOrDefault(sp => sp.Id == storeProduct.Id);
-            if (excists == null)
-            {
-                return false;
-            }
+            //var excists = _dbContext.StoreProducts.FirstOrDefault(sp => sp.Id == storeProduct.Id);
+            //if (excists == null)
+            //{
+            //    return false;
+            //}
 
-            _dbContext.StoreProducts.Attach(excists).State = EntityState.Modified;
+            _dbContext.StoreProducts.Attach(storeProduct).State = EntityState.Modified;
 
             return SaveChangesAtleastOne();
         }

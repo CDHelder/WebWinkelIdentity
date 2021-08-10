@@ -1,6 +1,32 @@
 ﻿@page
 @model RemoveStockModel
 @{
-    ViewData["Title"] = "Add Stock";
+    ViewData["Title"] = "Remove Stock";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+<h1>Remove Stock</h1>
+
+<h3 style="color:red">@Model.FormResult</h3>
+<br />
+
+<form method="post">
+    <div class="form-group">
+        <div class="form-group">
+            <select asp-for="SelectedStoreId" class="form-control" asp-items="Model.AllStores"
+                    style="width:400px"></select>
+            <br />
+        </div>
+        <textarea asp-for="AllText" class="form-group"
+                  style="min-width:300px; min-height:550px; font-size:30pt"
+                  placeholder="Make sure the id of the item on its label is in the textbox
+
+and that every id has its own line">
+        </textarea>
+        <span asp-validation-for="AllText" class="text-danger"></span>
+        <div class="form-group">
+            <br />
+            <input type="submit" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</form>

@@ -10,11 +10,11 @@ using WebWinkelIdentity.Data.Service.Interfaces;
 
 namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 {
-    public class ConfirmAddStockModel : PageModel
+    public class ConfirmRemoveStockModel : PageModel
     {
         private readonly IProductRepository _productRepository;
 
-        public ConfirmAddStockModel(IProductRepository productRepository)
+        public ConfirmRemoveStockModel(IProductRepository productRepository)
         {
             this._productRepository = productRepository;
         }
@@ -52,8 +52,8 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         {
             foreach (var storeProduct in StoreProducts)
             {
-                var addQuantity = AllTextDataList.Where(x=>x==storeProduct.ProductId).Count();
-                storeProduct.Quantity += addQuantity;
+                var addQuantity = AllTextDataList.Where(x => x == storeProduct.ProductId).Count();
+                storeProduct.Quantity -= addQuantity;
                 if (_productRepository.UpdateStoreProduct(storeProduct) == false)
                 {
                     FormResult = $"Error: Couldnt save product with id:{storeProduct.ProductId} in the database";
@@ -65,7 +65,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()),
                     DateChanged = DateTime.Now,
                     StoreProductId = storeProduct.Id,
-                    StockChange = addQuantity
+                    StockChange = -addQuantity
                 };
                 if (_productRepository.CreateProductStockChange(PSC) == false)
                 {
@@ -76,7 +76,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
 
             AllTextData = string.Join("\n", AllTextDataList);
             SuccesStoreId = PostStoreId;
-            return RedirectToPage("/SuccesfullyAddedStock");
+            return RedirectToPage("/SuccesfullyRemovedStock");
         }
     }
 }
