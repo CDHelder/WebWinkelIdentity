@@ -19,10 +19,13 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         }
 
         [BindProperty]
-        public List<Product> Products { get; set; }
+        public List<StoreProduct> StoreProducts { get; set; }
 
         [TempData]
         public string AllTextData { get; set; }
+        [TempData]
+        public int SuccesStoreId { get; set; }
+
         public List<int> AllTextDataList { get; set; }
 
         public IActionResult OnGet()
@@ -32,7 +35,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             Array.Sort(AllTextDataArray);
 
             AllTextDataList = AllTextDataArray.Select(x => int.Parse(x)).ToList();
-            Products = _productRepository.GetAllProducts(AllTextDataList);
+            StoreProducts = _productRepository.GetAllStoreProducts(AllTextDataList, SuccesStoreId);
 
             return Page();
         }

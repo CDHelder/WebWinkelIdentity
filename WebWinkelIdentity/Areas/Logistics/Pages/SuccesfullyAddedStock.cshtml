@@ -10,25 +10,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Id)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Store.Address.City)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Name)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].ProductId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Size)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Price)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Color)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Brand)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Color)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Products[0].Category)
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Brand)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StoreProducts[0].Product.Category)
             </th>
             <th>
                 <b>Stock Added</b>
@@ -37,43 +40,46 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Products)
+        @foreach (var item in Model.StoreProducts)
             {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Id)
+                @Html.DisplayFor(modelItem => item.Store.Address.City)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.ProductId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Size)
+                @Html.DisplayFor(modelItem => item.Product.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @Html.DisplayFor(modelItem => item.Product.Size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Color)
+                @Html.DisplayFor(modelItem => item.Product.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Brand.Name)
+                @Html.DisplayFor(modelItem => item.Product.Color)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Category.Name)
+                @Html.DisplayFor(modelItem => item.Product.Brand.Name)
             </td>
             <td>
-                <b>@Model.AllTextDataList.Count(adat => adat == item.Id)</b>
+                @Html.DisplayFor(modelItem => item.Product.Category.Name)
             </td>
             <td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        <a asp-area="ProductsManagement" asp-page="./EditStocks"
-                           asp-route-id="@item.Id">EditStocks</a>
-                        <a>|</a>
-                    }
-                    <a asp-area="ProductsManagement" asp-page="./Details"
-                       asp-route-id="@item.Id">Details</a>
-                </td>
+                <b>@Model.AllTextDataList.Where(adat => adat == item.ProductId).Count()</b>
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-area="ProductsManagement" asp-page="./EditStocks"
+                       asp-route-id="@item.Id">EditStocks</a>
+                    <a>|</a>
+                }
+                <a asp-area="ProductsManagement" asp-page="./Details"
+                   asp-route-id="@item.Id">Details</a>
+            </td>
         </tr>
             }
     </tbody>

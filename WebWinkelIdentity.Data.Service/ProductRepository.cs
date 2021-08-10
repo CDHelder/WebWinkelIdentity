@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using WebWinkelIdentity.Core;
 using WebWinkelIdentity.Core.StoreEntities;
 using WebWinkelIdentity.Data.Service.Interfaces;
@@ -65,6 +67,17 @@ namespace WebWinkelIdentity.Data.Service
                 .ToList();
         }
 
+        //TODO: Expressions
+        public List<Product> GetAll(Expression<Func<Product, bool>> expression = null)
+        {
+            IQueryable<Product> products = _dbContext.Products;
+
+            if (expression != null)
+                products.Where(expression);
+
+            return products.ToList();
+        }
+
         public List<Product> GetProductsByCategory(int categoryId)
         {
             return _dbContext.Products.Where(p => p.CategoryId == categoryId)
@@ -120,11 +133,7 @@ namespace WebWinkelIdentity.Data.Service
 
         public bool SaveChangesAtleastOne()
         {
-            if (_dbContext.SaveChanges() > 0)
-            {
-                return true;
-            }
-            return false;
+            return _dbContext.SaveChanges() > 0 ? true : false;
         }
 
         public bool DeleteProduct(int id)
@@ -270,6 +279,20 @@ namespace WebWinkelIdentity.Data.Service
                 .Include(psc => psc.StoreProduct)
                 .ThenInclude(p => p.Store)
                 .Include(psc => psc.AssociatedUser)
+                .ToList();
+        }
+
+        public List<StoreProduct> GetAllStoreProducts(List<int> productIds, int storeId)
+        {
+            var distinctProductIds = productIds.Distinct();
+            return _dbContext.StoreProducts
+                .Include(p => p.Product)
+                .ThenInclude(p => p.Brand)
+                .Include(p => p.Product)
+                .ThenInclude(p => p.Category)
+                .Include(p => p.Store)
+                .ThenInclude(s => s.Address)
+                .Where(p => distinctProductIds.Contains(p.ProductId) && p.StoreId == storeId)
                 .ToList();
         }
     }

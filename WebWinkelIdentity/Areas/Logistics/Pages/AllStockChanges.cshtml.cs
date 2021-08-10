@@ -20,6 +20,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             this._productRepository = productRepository;
         }
 
+        //TODO: Maak rollback functie om gemaakte veranderingen terug te veranderen
         public IList<ProductStockChange> ProductStockChange { get;set; }
 
         public void OnGetAsync()

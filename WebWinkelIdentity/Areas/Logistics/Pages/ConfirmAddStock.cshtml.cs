@@ -20,12 +20,16 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         }
 
         [BindProperty]
-        public List<Product> Products { get; set; }
+        public List<StoreProduct> StoreProducts { get; set; }
         [BindProperty]
         public List<int> AllTextDataList { get; set; }
+        [BindProperty]
+        public int PostStoreId { get; set; }
 
         [TempData]
         public int StoreId { get; set; }
+        [TempData]
+        public int SuccesStoreId { get; set; }
         [TempData]
         public string FormResult { get; set; }
         [TempData]
@@ -39,38 +43,41 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             Array.Sort(AllTextDataArray);
 
             AllTextDataList = AllTextDataArray.Select(x => int.Parse(x)).ToList();
-            Products = _productRepository.GetAllProducts(AllTextDataList);
+            StoreProducts = _productRepository.GetAllStoreProducts(AllTextDataList, StoreId);
+            PostStoreId = StoreId;
 
             return Page();
         }
 
         public IActionResult OnPost()
         {
-            foreach (var product in Products)
+            foreach (var storeProduct in StoreProducts)
             {
-                //product.Quantity += AllTextDataList.Count(adat => adat == foundProduct.Id);
-                //if (_productRepository.UpdateStoreProduct(foundProduct) == false)
-                //{
-                //    FormResult = $"Error: Couldnt save product with id:{foundProduct.Id} in the database";
-                //    return Page();
-                //}
+                var addQuantity = AllTextDataList.Where(x=>x==storeProduct.ProductId).Count();
+                storeProduct.Quantity += addQuantity;
+                if (_productRepository.UpdateStoreProduct(storeProduct) == false)
+                {
+                    FormResult = $"Error: Couldnt save product with id:{storeProduct.ProductId} in the database";
+                    return Page();
+                }
 
                 //TODO: Connect hier de StoreProduct aan de hand van StoreId en ProductId
                 ProductStockChange PSC = new ProductStockChange
                 {
                     UserId = User.FindFirstValue(ClaimTypes.NameIdentifier.ToString()),
                     DateChanged = DateTime.Now,
-                    //StoreProductId = product.Id && Store.Id,
-                    StockChange = AllTextDataList.Count(adat => adat == product.Id)
+                    StoreProductId = storeProduct.Id,
+                    StockChange = addQuantity
                 };
                 if (_productRepository.CreateProductStockChange(PSC) == false)
                 {
-                    FormResult = $"Error: Couldnt log the stock changes made to product with id:{product.Id}";
+                    FormResult = $"Error: Couldnt log the stock changes made to product with id:{storeProduct.ProductId}";
                     return Page();
                 }
             }
 
             AllTextData = string.Join("\n", AllTextDataList);
+            SuccesStoreId = PostStoreId;
             return RedirectToPage("/SuccesfullyAddedStock");
         }
     }

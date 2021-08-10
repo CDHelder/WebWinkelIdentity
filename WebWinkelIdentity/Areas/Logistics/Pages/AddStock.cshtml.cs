@@ -24,8 +24,8 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         [BindProperty]
         public string AllText { get; set; }
         [BindProperty]
-        public int SelectedStoreId { get; set; }
-        public SelectList AllStores { get; set; }
+        public string SelectedStoreId { get; set; }
+        public List<SelectListItem> AllStores { get; set; }
 
         [TempData]
         public int StoreId { get; set; }
@@ -37,7 +37,13 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
         public IActionResult OnGet()
         {
             AllText = null;
-            AllStores = new SelectList(_storeRepository.GetAllStores(), "Id", "Address.City");
+            AllStores = _storeRepository.GetAllStores().Select(s =>
+            new SelectListItem
+            {
+                Value = s.Id.ToString(),
+                Text = s.Address.City
+            }).ToList();
+
             return Page();
         }
 
@@ -49,13 +55,24 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
                 FormResult = "Please enter a product id";
                 return Page();
             }
+            if (SelectedStoreId == null)
+            {
+                FormResult = "Please select a store";
+                return Page();
+            }
 
             AllText = AllText.Replace("\r", "");
             var list = AllText.Split("\n");
 
+            var store = _storeRepository.GetStoreInfo(int.Parse(SelectedStoreId));
+            if (store == null)
+            {
+                FormResult = $"Error: Couldn't find store with id: {SelectedStoreId}";
+            }
+
             foreach (var productId in list)
             {
-                var product = _productRepository.GetStoreProduct(Int32.Parse(productId));
+                var product = _productRepository.GetStoreProduct(int.Parse(productId));
                 if (product == null)
                 {
                     FormResult = $"Error: Couldnt find product with id:{productId} in the database";
@@ -64,6 +81,7 @@ namespace WebWinkelIdentity.Web.Areas.Logistics.Pages
             }
 
             AllTextData = AllText;
+            StoreId = int.Parse(SelectedStoreId);
 
             return RedirectToPage("/ConfirmAddStock");
 

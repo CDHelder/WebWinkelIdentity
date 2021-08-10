@@ -9,13 +9,18 @@
 <h1>AllStockChanges</h1>
 
 <p>
-    <a asp-page="AddStock">Add Stock</a> ~
+    <a asp-page="AddStock" style="font-size:25px">Add</a>
+    <a style="font-size:25px">&nbsp;&nbsp;&nbsp;~&nbsp;&nbsp;&nbsp;</a>
+    <a asp-page="RemoveStock" style="font-size:25px">Remove</a>
 </p>
-@*<table class="table">
+<table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].StockChange)
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StoreProduct.Store.Address.City)
+            </th>
+            <th>
+                Change
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProductStockChange[0].DateChanged)
@@ -24,22 +29,22 @@
                 @Html.DisplayNameFor(model => model.ProductStockChange[0].AssociatedUser)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Id)
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StoreProduct.Product.Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Name)
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StoreProduct.Product.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Size)
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StoreProduct.Product.Size)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Price)
+                @Html.DisplayNameFor(model => model.ProductStockChange[0].StoreProduct.Product.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Category.Name)
+                Category
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ProductStockChange[0].Product.Brand.Name)
+                Brand
             </th>
             <th></th>
         </tr>
@@ -47,6 +52,9 @@
     <tbody>
 @foreach (var item in Model.ProductStockChange) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StoreProduct.Store.Address.City)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.StockChange)
             </td>
@@ -57,22 +65,22 @@
                 @Html.DisplayFor(modelItem => item.AssociatedUser.UserName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Id)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Id)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Name)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Size)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Size)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Price)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Price)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Category.Name)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Category.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Product.Brand.Name)
+                @Html.DisplayFor(modelItem => item.StoreProduct.Product.Brand.Name)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
@@ -82,4 +90,4 @@
         </tr>
 }
     </tbody>
-</table>*@
+</table>

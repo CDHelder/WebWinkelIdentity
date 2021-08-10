@@ -12,16 +12,17 @@
 <form method="post">
     <div class="form-group">
         <div class="form-group">
-            <select asp-for="@Model.SelectedStoreId" class="form-control" style="width:400px" asp-items="@Model.AllStores" />
+            <select asp-for="SelectedStoreId" class="form-control" asp-items="Model.AllStores"
+                    style="width:400px"></select>
             <br />
         </div>
-        <textarea asp-for="@Model.AllText" class="form-group"
+        <textarea asp-for="AllText" class="form-group"
                   style="min-width:300px; min-height:550px; font-size:30pt"
                   placeholder="Make sure the id of the item on its label is in the textbox
 
 and that every id has its own line">
         </textarea>
-        <span asp-validation-for="@Model.AllText" class="text-danger"></span>
+        <span asp-validation-for="AllText" class="text-danger"></span>
         <div class="form-group">
             <br />
             <input type="submit" value="Save" class="btn btn-primary" />
