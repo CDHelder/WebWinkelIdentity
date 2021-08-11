@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,8 +42,8 @@ namespace WebWinkelIdentity.Data.GenericRepositoryTest
         }
 
         public IEnumerable<T> Get(Expression<Func<T, bool>> filter = null, 
-            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null, 
-            string includeProperties = "")
+            Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include = null)
         {
             IQueryable<T> query = dbSet;
 
@@ -51,12 +52,9 @@ namespace WebWinkelIdentity.Data.GenericRepositoryTest
                 query = query.Where(filter);
             }
 
-            if (includeProperties != null)
+            if (include != null)
             {
-                foreach (var includeProp in includeProperties.Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProp);
-                }
+                query = include(query);
             }
 
             if (orderBy != null)
@@ -83,10 +81,7 @@ namespace WebWinkelIdentity.Data.GenericRepositoryTest
 
         public void Update(List<T> objs)
         {
-            foreach (var obj in objs)
-            {
-                Update(obj);
-            }
+            dbSet.UpdateRange(objs);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Query;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,7 +13,7 @@ namespace WebWinkelIdentity.Data.Service.GenericRepositoryTest
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null,
             Func<IQueryable<TEntity>,IOrderedQueryable<TEntity>> orderBy = null,
-            string includeProperties = "");
+            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null);
         TEntity GetById(int id);
         void Create(TEntity obj);
         void Update(TEntity obj);

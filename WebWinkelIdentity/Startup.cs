@@ -6,8 +6,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using WebWinkelIdentity.Data;
+using WebWinkelIdentity.Data.GenericRepositoryTest;
 using WebWinkelIdentity.Data.Service;
+using WebWinkelIdentity.Data.Service.GenericRepositoryTest;
 using WebWinkelIdentity.Data.Service.Interfaces;
+using WebWinkelIdentity.Web.ServicesExtensions;
 
 namespace WebWinkelIdentity
 {
@@ -28,28 +31,11 @@ namespace WebWinkelIdentity
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.ConfigureAuthenticationAndAuthorization();
 
             services.AddControllersWithViews();
 
-            services.AddScoped<IProductRepository, ProductRepository>();
-            services.AddScoped<IStoreRepository, StoreRepository>();
-
-            services.Configure<IdentityOptions>(options => {
-                options.Password.RequireDigit = false;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = false;
-                options.Password.RequiredLength = 6;
-                options.Password.RequiredUniqueChars = 1;
-            });
-
-            services.AddAuthorization(options => 
-            {
-                options.AddPolicy("EmployeeUsers", policy => policy.RequireClaim("AccountState", "Approved"));
-                options.AddPolicy("AdminOnly", policy => policy.RequireRole("Admin"));
-            });
+            services.ConfigureAllDependencyInjections();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
